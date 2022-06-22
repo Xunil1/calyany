@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    
+    {% if not logIn %}
+    <section class="formSection">
+        <div class="box">
+            <div class="form">
+                <h2>Вход</h2>
+                <form method="post">
+                    <div class="inputBx">
+                        <input type="text" name="username" id="username" placeholder="Имя пользователя">
+                    </div>
+                    <div class="inputBx">
+                        <input type="password" name="password" id="password" placeholder="Пароль">
+                    </div>
+                    <div class="inputBx">
+                        <input type="submit" value="Вход">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+        
+    {% else %}
+        <h1>Это админ-панель, для {{session['username']}}</h1>
+        <a href="/add_admin">Добавить админа</a>
+        <a href="/logout">Выйти</a>
+        <table>
+            
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Уникальное имя</th>
+                    <th>E-mail</th>
+                    <th>Время добавления</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for el in admins %}
+                    <tr>
+                        <td>{{el.name}}</td>
+                        <td>{{el.surname}}</td>
+                        <td>{{el.username}}</td>
+                        <td>{{el.email}}</td>
+                        <td>{{el.time.date()}}</td>
+                    </tr>
+                {% endfor %}
+
+
+
+            </tbody>
+            
+        </table>
+        
+    {% endif %}
+</body>
+</html>
