@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Админ-панель</title>
@@ -8,6 +8,7 @@
 <body>
     
     {% if not logIn %}
+
     <section class="formSection">
         <div class="box">
             <div class="form">
@@ -19,7 +20,7 @@
                     <div class="inputBx">
                         <input type="password" name="password" id="password" placeholder="Пароль">
                     </div>
-                    <div class="inputBx">
+                    <div class="inputBx" id="login-admin">
                         <input type="submit" value="Вход">
                     </div>
                 </form>
@@ -27,39 +28,58 @@
         </div>
     </section>
 
-        
     {% else %}
-        <h1>Это админ-панель, для {{session['username']}}</h1>
-        <a href="/add_admin">Добавить админа</a>
-        <a href="/logout">Выйти</a>
-        <table>
+
+        <div class="admin-body">
             
-            <thead>
-                <tr>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Уникальное имя</th>
-                    <th>E-mail</th>
-                    <th>Время добавления</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for el in admins %}
-                    <tr>
-                        <td>{{el.name}}</td>
-                        <td>{{el.surname}}</td>
-                        <td>{{el.username}}</td>
-                        <td>{{el.email}}</td>
-                        <td>{{el.time.date()}}</td>
-                    </tr>
-                {% endfor %}
-
-
-
-            </tbody>
+            <aside>
+            <div class="buttons">
+                <div class="aside-name">
+                    <p>Панель инструментов</p>
+                </div>
+                <div class="add-admin">
+                    <a href="/add_admin">Добавить админа</a>
+                </div>
+                <div class="logout">
+                    <a href="/logout">Выйти</a>
+                </div>
+            </div>
+            </aside>
             
-        </table>
-        
+            <div class="admin-tools">
+                <h1>Это админ-панель, для {{session['username']}}</h1>
+                <div class="admin-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Уникальное имя</th>
+                            <th>E-mail</th>
+                            <th>Время добавления</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for el in admins %}
+
+                            <tr>
+                                <td>{{el.name}}</td>
+                                <td>{{el.surname}}</td>
+                                <td>{{el.username}}</td>
+                                <td>{{el.email}}</td>
+                                <td>{{el.time.date()}}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
     {% endif %}
+
 </body>
 </html>

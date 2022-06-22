@@ -25,16 +25,13 @@ class Admin(db.Model):
         return '<Admin %r>' % self.name
 
 
-
-
-
-
 @app.route("/", methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         pass
     else:
         return render_template("index.html")
+
 
 @app.route("/admin", methods=['POST', 'GET'])
 def admin():
