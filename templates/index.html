@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="bg">
+    </div>
     <div class="first-screen">
-        <div class="title">
+        <div class="table-div">
+            <div class="title">
             <div class="title-first">
                 Доставка кальянов в Батуми за 30 лари
             </div>
             <div class="title-second">
                 Кальян как на родине. Must have, DarkSide, Daily hookah
             </div>
+            </div>
+            <div class="arrow">
+            <a href="#second-screen"><img src="{{ url_for('static', filename='img/arrow.png') }}" alt="arrow"></a>
+            </div>
         </div>
-        
     </div>
-    <div class="second-screen">
+    <div class="second-screen" id="second-screen">
         <div class="card" style="">
         <div class="card-title"><p>Табак</p></div>
         <div class="card-descr"><p>Новый табак</p></div>

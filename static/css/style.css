@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
 }
 
 .formSection{
@@ -124,6 +125,8 @@ aside {
     line-height: 50px;
     background-color: #36a4f7;
     margin: 5px 5px;
+    color: #fff;
+    font-size: 16px;
 }
 
 .add-admin:hover, .logout:hover {
@@ -203,26 +206,98 @@ aside {
     padding: 5px;
 }
 
+.table-div {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100vh;
+    width: 100vw;
+}
+
+.arrow img {
+    width: 40px;
+    animation: jumping 1.5s ease infinite;
+}
+
+@keyframes jumping {
+    from {transform: translateY(5px)}
+    50% {transform:  translateY(-5px);}
+    to {transform:  translateY(5px);}
+}
+
+.bg {
+    display: block;
+    height: 100vh;
+    width:  100%;
+    background-color: gray;
+    filter: brightness(0.3);
+    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../img/4.png);
+    background-attachment: fixed;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
 .first-screen {
     display: block;
     text-align: center;
     height: 100vh;
     width:  100%;
     bottom: 1px solid black;
-    background-color: gray;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    
 }
 
-.title-first{
-    display: block;
+.title {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    height: 500px;
-    padding-top: 42px;
-    padding-bottom: 42px;
-    border: 1px solid black;
+    justify-content: center;
+    height: 400px
+    width: 1140px;
+    max-width: 1140px;
+    color: #fff;
+    padding: 24px 0 38px 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title-first {
     display: block;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 1140px;
+    text-align: center;
+    padding: 24px 0 38px 0;
+    font-family: 'Roboto',Arial,sans-serif;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: .5px;
+}
+   
+.title-second {
+    display: block;
+    width: 700px;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Roboto',Arial,sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.5;
+
+}
+
+.second-screen {
+    height: 100vh;
 }

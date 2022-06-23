@@ -37,12 +37,14 @@
                 <div class="aside-name">
                     <p>Панель инструментов</p>
                 </div>
-                <div class="add-admin">
-                    <a href="/add_admin">Добавить админа</a>
+                <div>
+                    <form action="/add_admin" >
+                        <button class="add-admin">Добавить админа</button>
+                    </form>
                 </div>
-                <div class="logout">
-                    <a href="/logout">Выйти</a>
-                </div>
+                <form action="/logout" >
+                        <button class="logout">Выйти</button>
+                    </form>
             </div>
             </aside>
             
@@ -99,7 +101,7 @@
                             <tr>
                                 <td>{{el.id}}</td>
                                 <td>{{el.name}}</td>
-                                <td>{{el.adr}}</td>
+                                <td>{{el.addr}}</td>
                                 <td>{{el.telwhat}}</td>
                                 <td>{{el.comment}}</td>
                                 <td>{{el.deposit}}</td>
