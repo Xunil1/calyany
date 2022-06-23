@@ -20,7 +20,7 @@ class Admin(db.Model):
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
-    time = db.Column(db.DateTime, default=datetime.today())
+    time = db.Column(db.DateTime, default=datetime.utcnow())
 
     def __repr__(self):
         return '<Admin %r>' % self.name
@@ -37,8 +37,8 @@ class Order(db.Model):
     order_el = db.Column(db.Text, nullable=False)
     order_price = db.Column(db.Float, default=0)
     status = db.Column(db.String(100), default="Принят")
-    time = db.Column(db.DateTime, default=datetime.today())
-    update_time = db.Column(db.DateTime, default=datetime.today())
+    time = db.Column(db.DateTime, nullable=False)
+    update_time = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
         return '<Order %r>' % self.name
@@ -50,7 +50,7 @@ class Products(db.Model):
     description = db.Column(db.String(300), nullable=False)
     price = db.Column(db.Float, default=0)
     count = db.Column(db.Integer, default=0)
-    time = db.Column(db.DateTime, default=datetime.today())
+    time = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
         return '<Product %r>' % self.name
@@ -77,7 +77,9 @@ def admin():
         else:
             logIn = True
         admins = Admin.query.order_by(Admin.time.desc()).all()
-        return render_template("admin.html", logIn=logIn, admins=admins)
+        orders = Order.query.order_by(Order.time.desc()).all()
+        products = Products.query.order_by(Products.time.desc()).all()
+        return render_template("admin.html", logIn=logIn, admins=admins, orders=orders, products=products)
 
 
 @app.route("/add_admin", methods=['POST', 'GET'])
@@ -95,13 +97,35 @@ def addAdmin():
             db.session.commit()
             return redirect('/admin')
         except:
-            return "При добавлении карточки произошла ошибка"
+            return "При добавлении пользователя произошла ошибка"
     else:
         if 'username' not in session:
             return redirect('/admin')
         else:
             return render_template("add_admin.html")
 
+
+@app.route("/add_product", methods=['POST', 'GET'])
+def addProduct():
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        price = request.form['price']
+        count = request.form['count']
+
+        product = Products(name=name, description=description, price=price, count=count, time=datetime.today())
+
+        try:
+            db.session.add(product)
+            db.session.commit()
+            return redirect('/admin')
+        except:
+            return "При добавлении карточки произошла ошибка"
+    else:
+        if 'username' not in session:
+            return redirect('/admin')
+        else:
+            return render_template("add_products.html")
 
 
 @app.route("/logout")
@@ -111,13 +135,17 @@ def logout():
 
 
 def add_order_from_telegram(order):
-    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"])
+    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], time=datetime.today(), update_time=datetime.today())
     try:
         db.session.add(order_to_bd)
         db.session.commit()
         return True
     except:
         return False
+
+def set_products_into_telegram():
+    products = Products.query.order_by(Products.time.desc()).all()
+    return products
 
 
 if __name__ == "__main__":

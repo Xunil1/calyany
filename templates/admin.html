@@ -33,19 +33,26 @@
         <div class="admin-body">
             
             <aside>
-            <div class="buttons">
-                <div class="aside-name">
-                    <p>Панель инструментов</p>
+                <div class="buttons">
+                    <div class="aside-name">
+                        <p>Панель инструментов</p>
+                    </div>
+                    <div>
+                        <form action="/add_admin" >
+                            <button class="add-admin">Добавить админа</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="/add_product" >
+                            <button class="add-admin">Добавить товар</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="/logout" >
+                            <button class="logout">Выйти</button>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <form action="/add_admin" >
-                        <button class="add-admin">Добавить админа</button>
-                    </form>
-                </div>
-                <form action="/logout" >
-                        <button class="logout">Выйти</button>
-                    </form>
-            </div>
             </aside>
             
             <div class="admin-tools">
@@ -70,7 +77,7 @@
                                 <td>{{el.surname}}</td>
                                 <td>{{el.username}}</td>
                                 <td>{{el.email}}</td>
-                                <td>{{el.time.date()}}</td>
+                                <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                             </tr>
 
                         {% endfor %}
@@ -92,11 +99,13 @@
                                 <th>Заказ</th>
                                 <th>Сумма заказа</th>
                                 <th>Статус</th>
+                                <th>Время заказа</th>
+                                <th>Время обновления статуса</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            {% for el in order %}
+                            {% for el in orders %}
 
                             <tr>
                                 <td>{{el.id}}</td>
@@ -109,6 +118,36 @@
                                 <td>{{el.order_el}}</td>
                                 <td>{{el.order_price}}</td>
                                 <td>{{el.status}}</td>
+                                <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
+                                <td>{{el.update_time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="order-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th>Цена</th>
+                                <th>Количество</th>
+                                <th>Время добавления</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for el in products %}
+
+                            <tr>
+                                <td>{{el.name}}</td>
+                                <td>{{el.description}}</td>
+                                <td>{{el.price}}</td>
+                                <td>{{el.count}}</td>
+                                <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                             </tr>
 
                             {% endfor %}
