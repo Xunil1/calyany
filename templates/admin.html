@@ -75,7 +75,42 @@
 
                     </tbody>
                 </table>
-            </div>
+                </div>
+                <div class="order-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Номер заказа</th>
+                                <th>Имя</th>
+                                <th>Адрес</th>
+                                <th>Номер телефона</th>
+                                <th>Telegram/WhatApp</th>
+                                <th>Комментарий</th>
+                                <th>Залог</th>
+                                <th>Заказ</th>
+                                <th>Сумма заказа</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for el in order %}
+
+                            <tr>
+                                <td>{{el.id}}</td>
+                                <td>{{el.name}}</td>
+                                <td>{{el.adr}}</td>
+                                <td>{{el.telwhat}}</td>
+                                <td>{{el.comment}}</td>
+                                <td>{{el.deposit}}</td>
+                                <td>{{el.order}}</td>
+                                <td>{{el.sum}}</td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
