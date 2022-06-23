@@ -9,117 +9,198 @@
 <body>
     <div class="bg">
     </div>
+
     <div class="first-screen">
+
         <div class="table-div">
+
             <div class="title">
-            <div class="title-first">
-                <h1>Доставка кальянов в Батуми за 30 лари</h1>
+
+                <div class="title-first">
+                    <h1>Доставка кальянов в Батуми за 30 лари</h1>
+                </div>
+
+                <div class="title-second">
+                    <h2>Кальян как на родине. Must Have, DarkSide, Daily hookah</h2>
+                </div>
+
             </div>
-            <div class="title-second">
-                <h2>Кальян как на родине. Must Have, DarkSide, Daily hookah</h2>
-            </div>
-            </div>
+
             <div class="arrow">
-            <a href="#second-screen"><img src="{{ url_for('static', filename='img/arrow.png') }}" alt="arrow"></a>
+                <a href="#second-screen"><img src="{{ url_for('static', filename='img/arrow.png') }}" alt="arrow"></a>
             </div>
+
         </div>
+
     </div>
     
     <div class="second-screen" id="second-screen">
+
         <div class="hookah-cup-main">
+
             <div class="hookah-cup-container">
+
                 <div class="hookah-cup-img">
                     <img src="{{ url_for('static', filename='img/hookah.jpg') }}" alt="hookah.jpg">
                 </div>
+
                 <div class="hookah-cup-title">
                     Кальян
                 </div>
+
                 <div class="hookah-cup-description">
                     Nube Junior классический современный кальян с хорошей тягой и качественной сборкой.
                 </div>
+
                 <div class="hookah-cup-price">
+
                     <div class="new-price">
                       30 GEL  
                     </div>
+
                     <div class="old-price">
                       90 GEL  
                     </div> 
+
                 </div>
+
                 <div class="hookah-cup-order">
                     <a href="#">Заказать</a>
                 </div>
+
             </div>
         
             <div class="hookah-cup-container">
+
                 <div class="hookah-cup-img">
+
                     <img src="{{ url_for('static', filename='img/cup.jpg') }}" alt="cup.jpg">
                 </div>
+
                 <div class="hookah-cup-title">
                     Дополнительаня забивка
                 </div>
+
                 <div class="hookah-cup-description">
                     Порция табака и угля на дополнительную забивку.
                 </div>
+
                 <div class="hookah-cup-price">
+
                     <div class="new-price">
                       12 GEL  
                     </div>
+
                     <div class="old-price">
                       20 GEL  
                     </div> 
+
                 </div>
+
                 <div class="hookah-cup-order">
                     <a href="#">Добавить</a>
                 </div>
+
             </div>
+
         </div>  
+
     </div>
 
     <div class="third-screen">
+
         <div class="third-screen-title">
+
             <div class="third-screen-title-main">
                 Что по табаку?
             </div>
+
             <div class="third-screen-title-description">
                 <p>Мы стараемся поддерживать и постоянно расширять ассортимент нашего табака. Ниже вы можете ознакомиться, что у нас есть по наличию.</p>
                 <p>(нажми добавить чашу, чтобы знать что тебе везти)</p>
             </div>
+
         </div>
+
+        <div class="cards">
+
+            {% for el in products %}
+
+                <a href="#">
+
+                    <div class="card">
+
+                        <div class="card-title">
+                            {{el.name}}
+                        </div>
+
+                        <div class="card-description">
+                            {{el.description}}
+                        </div>
+
+                        <div class="card-add">
+                            Добавить в чашу
+                        </div>
+
+                        </div>
+
+                </a>
+                
+            {% endfor %}
+
+        </div>  
+
         <div class="end-message">
+
             <div class="first-end-message">
                 Обычно кальян привозим в течении одного часа после приема заказа. После получения заказа мы обязательно с вами спишемся-созвонимся в мессенджере или обычном звонке.
             </div>
+
             <div class="second-end-message">
                 Вы закончили формировать заказ
                 жмем по иконке корзины справа, оставляем контакты
                 и ждем доставочку!
             </div>
+
             <div class="sticker">
                 
             </div>
+
             <div class="you-can-call-us">
                 Вы всегда можете нам написать и позвонить
             </div>
+
             <div class="find-us">
                 А также найти нас в хорошую погоду на пляже рядом с аэропортом
             </div>
+
             <div class="location">
                 Georgia, Batumi
             </div>
+
             <div class="social">
+
                 <a href="https://www.instagram.com/batumi_hookah_delivery/">
                     <img src="{{ url_for('static', filename='img/instagram.png') }}" alt="instagram.png">
                 </a>
+
                 <a href="https://t.me/WallStreetBroker_bot">
                     <img src="{{ url_for('static', filename='img/telegram.png') }}" alt="telegram.png">
                 </a>
+
             </div>
+
         </div>
+
     </div>
+
     <footer>
+
         <div class="legal-policy">
-            
+            <a href="/legal_policy">ПРАВОВАЯ ИНФОРМАЦИЯ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
         </div>
+
     </footer>
+    
 </body>
 </html>

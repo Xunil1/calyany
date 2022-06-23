@@ -61,7 +61,8 @@ def index():
     if request.method == 'POST':
         pass
     else:
-        return render_template("index.html")
+        products = Products.query.order_by(Products.time.desc()).all()
+        return render_template("index.html", products=products)
 
 
 @app.route("/admin", methods=['POST', 'GET'])
@@ -132,6 +133,11 @@ def addProduct():
 def logout():
     session.pop('username', None)
     return redirect('/admin')
+
+
+@app.route("/legal_policy")
+def legal_policy():
+    return render_template('legal_policy.html')
 
 
 def add_order_from_telegram(order):
