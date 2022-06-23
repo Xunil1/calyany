@@ -266,8 +266,7 @@ aside {
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    height: 400px
-    width: 1140px;
+    height: 400px;
     max-width: 1140px;
     color: #fff;
     padding: 24px 0 38px 0;
@@ -277,7 +276,7 @@ aside {
 
 .title-first {
     display: block;
-    width: 1140px;
+    max-width: 1140px;
     text-align: center;
     padding: 24px 0 38px 0;
     font-family: 'Roboto',Arial,sans-serif;
@@ -286,10 +285,18 @@ aside {
     line-height: 1.17;
     letter-spacing: .5px;
 }
-   
+
+.title-first h1 {
+    font-family: 'Roboto',Arial,sans-serif;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1.17;
+    letter-spacing: .5px;
+}
+
 .title-second {
     display: block;
-    width: 700px;
+    max-width: 700px;
     text-align: center;
     margin: 0 auto;
     font-family: 'Roboto',Arial,sans-serif;
@@ -297,6 +304,13 @@ aside {
     font-weight: 300;
     line-height: 1.5;
 
+}
+
+.title-second h2 {
+    font-family: 'Roboto',Arial,sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.5;
 }
 
 .second-screen {
@@ -395,6 +409,7 @@ aside {
     line-height: 1.23;
     font-weight: 600;
     color: #000;
+    text-align: center;
 }
 
 .third-screen-title-description {
