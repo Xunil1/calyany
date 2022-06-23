@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
+    text-decoration: none;
 }
 
 .formSection{
@@ -299,5 +300,68 @@ aside {
 }
 
 .second-screen {
+    display:  flex;
     height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hookah-cup-main {
+
+}
+
+.hookah-cip-container {
+   
+}
+
+.hookah-cup-img {
+
+}
+
+.hookah-cup-title {
+    font-size: 28px;
+    line-height: 1.17;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 18px;
+
+}
+
+.hookah-cup-description {
+    width: 560px;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 300;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.hookah-cup-price {
+    margin-bottom: 30px;
+}
+
+.new-price {
+    display:  inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #000;
+}
+
+.old-price {
+    display:  inline-block;
+    vertical-align: middle;
+    color: #bdbdbd;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;   
+    text-decoration: line-through;
+}
+
+.hookah-cup-order {
+    color: #ff8562;
+    background-color: #000000;
 }
