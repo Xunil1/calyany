@@ -5,6 +5,7 @@ from datetime import datetime
 import os
 import config
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -23,6 +24,36 @@ class Admin(db.Model):
 
     def __repr__(self):
         return '<Admin %r>' % self.name
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(300), nullable=False)
+    phone = db.Column(db.String(100), nullable=False)
+    messenger = db.Column(db.String(100), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    deposit = db.Column(db.String(100), nullable=False)
+    order_el = db.Column(db.Text, nullable=False)
+    order_price = db.Column(db.Float, default=0)
+    status = db.Column(db.String(100), default="Принят")
+    time = db.Column(db.DateTime, default=datetime.today())
+    update_time = db.Column(db.DateTime, default=datetime.today())
+
+    def __repr__(self):
+        return '<Order %r>' % self.name
+
+
+class Products(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(300), nullable=False)
+    price = db.Column(db.Float, default=0)
+    count = db.Column(db.Integer, default=0)
+    time = db.Column(db.DateTime, default=datetime.today())
+
+    def __repr__(self):
+        return '<Product %r>' % self.name
 
 
 @app.route("/", methods=['POST', 'GET'])
@@ -66,13 +97,27 @@ def addAdmin():
         except:
             return "При добавлении карточки произошла ошибка"
     else:
-        return render_template("add_admin.html")
+        if 'username' not in session:
+            return redirect('/admin')
+        else:
+            return render_template("add_admin.html")
+
 
 
 @app.route("/logout")
 def logout():
     session.pop('username', None)
     return redirect('/admin')
+
+
+def add_order_from_telegram(order):
+    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"])
+    try:
+        db.session.add(order_to_bd)
+        db.session.commit()
+        return True
+    except:
+        return False
 
 
 if __name__ == "__main__":

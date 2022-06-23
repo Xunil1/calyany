@@ -1,0 +1,2 @@
+Login: Rustam
+Hash password: pbkdf2:sha256:260000$xQKqFNpJSjh9V8FT$c55bbe00e38a082c6b045a4a2b7b62cd147905f622d758aa023665394226417a
