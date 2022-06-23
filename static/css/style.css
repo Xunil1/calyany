@@ -301,7 +301,6 @@ aside {
 
 .second-screen {
     display:  flex;
-    height: 100vh;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -309,11 +308,12 @@ aside {
 }
 
 .hookah-cup-main {
-
+    /*margin: 60px;*/
 }
 
-.hookah-cip-container {
-   
+.hookah-cup-container {
+    display: block;
+    margin: 60px auto;
 }
 
 .hookah-cup-img {
@@ -362,6 +362,119 @@ aside {
 }
 
 .hookah-cup-order {
+    margin: 0 auto 120px auto;
+    display: flex;
+    height: 60px;
+    width: 194px;
+    justify-content: center;
+    align-items: center;
     color: #ff8562;
     background-color: #000000;
+    border: 30px;
+    border-radius: 30px;
+    border-color: black;
+}
+
+.hookah-cup-order a {
+    color: #ff8562;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.third-screen-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.third-screen-title-main {
+    margin-bottom: 40px;
+    font-size: 42px;
+    line-height: 1.23;
+    font-weight: 600;
+    color: #000;
+}
+
+.third-screen-title-description {
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: #000;
+    text-align: center;
+
+}
+
+.first-end-message {
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    font-size: 18px;
+    line-height: 1.55; 
+    font-weight: 300;
+    text-align: center;
+    color: #000;
+
+}
+
+.second-end-message {
+    max-width: 450px;
+    font-size: 20px;
+    line-height: 1.55;
+    font-weight: 350;
+    margin-left: 100px;
+    margin-top: 45px;
+}
+
+.you-can-call-us {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    font-size: 42px;
+    line-height: 1.23;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+}
+
+.find-us {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    margin-bottom: 35px;
+    font-size: 26px;
+    line-height: 1.5;
+    font-weight: 300;
+    text-align: center;
+    color: #000;
+}
+
+.location {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 300;
+    text-align: center;
+    color: #000;
+}
+
+.social {
+    max-width: 720px;
+    margin: 45px auto 45px auto;
+    text-align: center;
+    max-width: 150px;
+}
+
+.social img {
+    max-width: 50px;
 }
