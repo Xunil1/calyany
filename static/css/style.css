@@ -202,3 +202,27 @@ aside {
     border: 1px solid black;
     padding: 5px;
 }
+
+.first-screen {
+    display: block;
+    text-align: center;
+    height: 100vh;
+    width:  100%;
+    bottom: 1px solid black;
+    background-color: gray;
+}
+
+.title-first{
+    display: block;
+    text-align: center;
+    height: 500px;
+    padding-top: 42px;
+    padding-bottom: 42px;
+    border: 1px solid black;
+}
+
+.title-first {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
