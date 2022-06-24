@@ -141,7 +141,7 @@ def legal_policy():
 
 
 def add_order_from_telegram(order):
-    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], time=datetime.today(), update_time=datetime.today())
+    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], order_price=order["order_price"], time=datetime.today(), update_time=datetime.today())
     try:
         db.session.add(order_to_bd)
         db.session.commit()
