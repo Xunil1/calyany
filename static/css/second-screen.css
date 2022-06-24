@@ -1,0 +1,85 @@
+.second-screen {
+    display:  flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hookah-cup-main {
+    /*margin: 60px;*/
+}
+
+.hookah-cup-container {
+    display: block;
+    margin: 60px auto;
+}
+
+.hookah-cup-img {
+
+}
+
+.hookah-cup-title {
+    font-size: 28px;
+    line-height: 1.17;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 18px;
+
+}
+
+.hookah-cup-description {
+    width: 560px;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 300;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.hookah-cup-price {
+    margin-bottom: 30px;
+}
+
+.new-price {
+    display:  inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #000;
+}
+
+.old-price {
+    display:  inline-block;
+    vertical-align: middle;
+    color: #bdbdbd;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 600;   
+    text-decoration: line-through;
+}
+
+.hookah-cup-order {
+    margin: 0 auto 120px auto;
+    display: flex;
+    height: 60px;
+    width: 194px;
+    justify-content: center;
+    align-items: center;
+    color: #ff8562;
+    background-color: #000000;
+    border: 30px;
+    border-radius: 30px;
+    border-color: black;
+}
+
+.hookah-cup-order:hover, .hookah-cup-order a :hover {
+    color:  #000;
+    background-color: #ff8562;
+    transition:  300ms linear all;
+}
+
+.hookah-cup-order:not(:hover) {
+    transition:  500ms linear all
+}

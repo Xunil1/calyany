@@ -9,51 +9,34 @@
 <body>
     <div class="bg">
     </div>
-
     <div class="first-screen">
-
         <div class="table-div">
-
             <div class="title">
-
                 <div class="title-first">
                     <h1>Доставка кальянов в Батуми за 30 лари</h1>
                 </div>
-
                 <div class="title-second">
                     <h2>Кальян как на родине. Must Have, DarkSide, Daily hookah</h2>
                 </div>
-
             </div>
-
             <div class="arrow">
                 <a href="#second-screen"><img src="{{ url_for('static', filename='img/arrow.png') }}" alt="arrow"></a>
             </div>
-
         </div>
-
     </div>
-    
     <div class="second-screen" id="second-screen">
-
         <div class="hookah-cup-main">
-
             <div class="hookah-cup-container">
-
                 <div class="hookah-cup-img">
                     <img src="{{ url_for('static', filename='img/hookah.jpg') }}" alt="hookah.jpg">
                 </div>
-
                 <div class="hookah-cup-title">
                     Кальян
                 </div>
-
                 <div class="hookah-cup-description">
                     Nube Junior классический современный кальян с хорошей тягой и качественной сборкой.
                 </div>
-
                 <div class="hookah-cup-price">
-
                     <div class="new-price">
                       30 GEL  
                     </div>
@@ -61,146 +44,169 @@
                     <div class="old-price">
                       90 GEL  
                     </div> 
-
                 </div>
-
-                <div class="hookah-cup-order">
-                    <a href="#">Заказать</a>
-                </div>
-
-            </div>
-        
+                <a href="#">
+                    <div class="hookah-cup-order add" data-id="calyan">
+                        Заказать
+                    </div>
+                </a>
+            </div>      
             <div class="hookah-cup-container">
-
                 <div class="hookah-cup-img">
-
                     <img src="{{ url_for('static', filename='img/cup.jpg') }}" alt="cup.jpg">
                 </div>
-
                 <div class="hookah-cup-title">
-                    Дополнительаня забивка
+                    Дополнительная забивка
                 </div>
-
                 <div class="hookah-cup-description">
                     Порция табака и угля на дополнительную забивку.
                 </div>
-
                 <div class="hookah-cup-price">
-
                     <div class="new-price">
                       12 GEL  
                     </div>
-
                     <div class="old-price">
                       20 GEL  
                     </div> 
-
                 </div>
-
-                <div class="hookah-cup-order">
-                    <a href="#">Добавить</a>
-                </div>
-
+                <a href="#">
+                    <div class="hookah-cup-order add" data-id="extra-cup">
+                        Добавить
+                    </div>
+                </a>
             </div>
-
         </div>  
-
     </div>
-
     <div class="third-screen">
-
         <div class="third-screen-title">
-
             <div class="third-screen-title-main">
                 Что по табаку?
             </div>
-
             <div class="third-screen-title-description">
                 <p>Мы стараемся поддерживать и постоянно расширять ассортимент нашего табака. Ниже вы можете ознакомиться, что у нас есть по наличию.</p>
                 <p>(нажми добавить чашу, чтобы знать что тебе везти)</p>
             </div>
-
         </div>
-
         <div class="cards">
 
             {% for el in products %}
 
-                <a href="#">
-
-                    <div class="card">
-
-                        <div class="card-title">
-                            {{el.name}}
-                        </div>
-
-                        <div class="card-description">
-                            {{el.description}}
-                        </div>
-
-                        <div class="card-add">
-                            Добавить в чашу
-                        </div>
-
-                        </div>
-
-                </a>
+                <div class="card">
+                    <div class="card-title">
+                        {{el.name}}
+                    </div>
+                    <div class="card-description">
+                        {{el.description}}
+                    </div>
+                    <div class="card-add add" data-id="{{el.id}}">
+                        Добавить в чашу
+                    </div>
+                </div>
                 
             {% endfor %}
 
         </div>  
-
         <div class="end-message">
-
             <div class="first-end-message">
                 Обычно кальян привозим в течении одного часа после приема заказа. После получения заказа мы обязательно с вами спишемся-созвонимся в мессенджере или обычном звонке.
             </div>
-
             <div class="second-end-message">
                 Вы закончили формировать заказ
                 жмем по иконке корзины справа, оставляем контакты
                 и ждем доставочку!
             </div>
-
-            <div class="sticker">
-                
+            <div class="sticker">                
             </div>
-
             <div class="you-can-call-us">
                 Вы всегда можете нам написать и позвонить
             </div>
-
             <div class="find-us">
                 А также найти нас в хорошую погоду на пляже рядом с аэропортом
             </div>
-
             <div class="location">
                 Georgia, Batumi
             </div>
-
             <div class="social">
-
                 <a href="https://www.instagram.com/batumi_hookah_delivery/">
                     <img src="{{ url_for('static', filename='img/instagram.png') }}" alt="instagram.png">
                 </a>
-
                 <a href="https://t.me/WallStreetBroker_bot">
                     <img src="{{ url_for('static', filename='img/telegram.png') }}" alt="telegram.png">
                 </a>
-
             </div>
-
         </div>
-
     </div>
-
     <footer>
-
         <div class="legal-policy">
             <a href="/legal_policy">ПРАВОВАЯ ИНФОРМАЦИЯ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
         </div>
-
     </footer>
-    
+    <div class="cart__mini">
+        <div class="cart__mini__img">
+            <img src="{{ url_for('static', filename='img/cart.png') }}" alt="cart">
+        </div>
+        <div class="cart__mini__counter">         
+        </div>        
+    </div>
+    <div class="cart">
+        <div class="cart__exit">       
+        </div>
+        <div class="cart__container">
+            <div class="cart__title">  
+                Ваш заказ:     
+            </div>
+            <div class="cart__products">       
+            </div>
+            <div class="cart_fullprice">     
+            </div>
+            <form action="">
+                <div class="cart__items">
+                    <div class="cart__item">
+                        <div class="cart__item__title">Имя</div>
+                        <div class="cart__item__input">
+                            <input type="text" class="form__input" id="name">
+                        </div>
+                    </div>
+                    <div class="cart__item">
+                        <div class="cart__item__title">Адрес</div>
+                        <div class="cart__item__input">
+                            <input type="text" class="form__input" id="addr">
+                        </div>
+                    </div>
+                    <div class="cart__item">
+                        <div class="cart__item__title">Грузинский номер телефона</div>
+                        <div class="cart__item__input">
+                            <input type="text" class="form__input" id="phone">
+                        </div>
+                    </div>
+                    <div class="cart__item">
+                        <div class="cart__item__title">Telegram или WhatsApp</div>
+                        <div class="cart__item__input">
+                            <input type="text" class="form__input" id="telwhat">
+                        </div>
+                    </div>
+                    <div class="cart__item"> 
+                        <div class="cart__item__title">Комментарий к заказу</div>
+                        <div class="cart__item__input">
+                            <input type="text" class="form__input" id="comment">
+                        </div>
+                    </div>
+                    <div class="cart__item">
+                        <div class="cart__item__title">Оставлю в залог</div>
+                        <div>
+                            <input type="radio" name="deposit" value="passport">
+                            300₾ или 100$
+                        </div>
+                        <div>
+                            <input type="radio" name="deposit" value="money">
+                            Паспорт
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 </body>
 </html>
