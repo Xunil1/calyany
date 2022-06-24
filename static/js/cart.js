@@ -1,3 +1,8 @@
+console.log(json)
+let pricing = {
+	"calyan": 30,
+	"extra-cup": 12
+} 
 let cart = {
 
 }
@@ -36,16 +41,34 @@ const addFunction = id => {
 
 const renderCart = () => {
     console.log(cart)
-    $data.find('input[type=checkbox]').each(function() {
-       //находим инпуты для удаления и удаляем вместе с родительским li
-       $("#city_list #" + $(this).attr('id')).parent().remove()
-     })
-    $('#cart__products').parentNode.removeChild($('#cart__products'));
-	var html = '';
-	Object.keys(cart).map(function(cart_el) {    
-	    html += '<div id="cart_el">'+ cart_el + '</div>';
+    $('#cart__products').empty()
+    $('#cart__products__inputs').empty()
+    $('.final__price').empty()
+	let html_products = ''
+	let html_products_inputs = ''
+	let price = 0
+	
+	Object.keys(cart).map(function(cart_el) {
+		if (cart_el === "calyan"){
+			html_products += '<div id="cart_el"> Кальян Количество: ' + cart[cart_el] + '</div>' 
+			price += cart[cart_el] * pricing[cart_el]
+		}
+		else if (cart_el === "extra-cup"){
+			html_products += '<div id="cart_el"> Доп.забивка Количество: ' + cart[cart_el] + '</div>'
+			price += cart[cart_el] * pricing[cart_el]
+		}
+		else{
+			html_products += '<div id="cart_el">'+ json[cart_el] + ' Количество: ' + cart[cart_el] + '</div>'
+		}
+		html_products_inputs += '<input type="hidden" name="order_' + cart_el + '" id="order_' + cart_el + '" value="' + cart[cart_el] + '">'
+	    
 	});
-	$('#cart__products').append(html);
+	$('#cart__products').append(html_products);
+	$('#cart__products__inputs').append(html_products_inputs);
+
+
+	let html_price = 'Сумма: ' + price + ' GEL'
+	$('.final__price').append(html_price);
 }
 
 renderCart()

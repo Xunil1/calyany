@@ -142,7 +142,7 @@
             <a href="/legal_policy">ПРАВОВАЯ ИНФОРМАЦИЯ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
         </div>
     </footer>
-    <div class="cart__mini cart_show">
+    <div class="cart__mini cart_show" id="cart__mini">
         <div class="cart__mini__img">
             <img class="cart_show" src="{{ url_for('static', filename='img/cart.png') }}" alt="cart">
         </div>
@@ -160,46 +160,47 @@
             </div>
             <div class="cart_fullprice">     
             </div>
-            <form action="">
+            <form action="" method="post">
                 <div class="cart__items">
+                    <div class="cart__item" id="cart__products__inputs"></div>
                     <div class="cart__item">
                         <div class="cart__item__title">Имя</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="name" placeholder="Имя">
+                            <input type="text" class="form__input" id="name" name="name" placeholder="Имя" required>
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Адрес</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="addr" placeholder="Введите адрес">
+                            <input type="text" class="form__input" id="address" name="address" placeholder="Введите адрес" required>
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Грузинский номер телефона</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="phone" placeholder="Начинается +995">
+                            <input type="text" class="form__input" id="phone" name="phone" placeholder="Начинается +995" required>
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Telegram или WhatsApp</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="telwhat" placeholder="Как найти в Telegram или WhatsApp?">
+                            <input type="text" class="form__input" id="messenger" name="messenger" placeholder="Как найти в Telegram или WhatsApp?" required>
                         </div>
                     </div>
                     <div class="cart__item"> 
                         <div class="cart__item__title">Комментарий к заказу</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="comment" placeholder="Ваши пожелания">
+                            <input type="text" class="form__input" id="comment" name="comment" placeholder="Ваши пожелания" required>
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Оставлю в залог</div>
                         <div>
-                            <input type="radio" class="custom__radio" id="money" name="deposit" value="passport">
+                            <input type="radio" class="custom__radio" id="money" name="deposit" value="passport" required>
                             <label for="money">300₾ или 100$</label>
                         </div>
                         <div>
-                            <input type="radio" class="custom__radio" id="passport" name="deposit" value="money">
+                            <input type="radio" class="custom__radio" id="passport" name="deposit" value="money" required>
                              <label for="passport">Паспорт</label>
                         </div>
                     </div>
@@ -208,8 +209,6 @@
                             <div>Минимальный заказ: 30 GEL</div>
                         </div>
                         <div class="final__price">
-                            Сумма:
-                            <input type="hidden" value="">
                         </div>
                         <div class="cart__order">
                             <div class="cart__order__text">
@@ -223,10 +222,14 @@
             </form>
         </div>
     </div>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+    <script>
+        const json = JSON.parse('{{ for_json | tojson | safe}}')
+        // console.log(json)
+    </script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 </body>
 </html>

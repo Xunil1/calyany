@@ -39,25 +39,39 @@
                     </div>
                     <div>
                         <form action="/add_admin" >
-                            <button class="add-admin">Добавить админа</button>
+                            <button class="button">Добавить админа</button>
                         </form>
                     </div>
                     <div>
                         <form action="/add_product" >
-                            <button class="add-admin">Добавить товар</button>
+                            <button class="button">Добавить товар</button>
                         </form>
                     </div>
                     <div>
                         <form action="/logout" >
-                            <button class="logout">Выйти</button>
+                            <button class="button logout">Выйти</button>
                         </form>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="aside-name">
+                        <p>Таблицы</p>
+                    </div>
+                    <div>
+                        <button class="button show-admin">Таблица админов</button>
+                    </div>
+                    <div>
+                        <button class="button show-order">Таблица заказов</button>
+                    </div>
+                    <div>
+                        <button class="button show-product">Таблица товаров</button>
                     </div>
                 </div>
             </aside>
             
             <div class="admin-tools">
                 <h1>Это админ-панель, для {{session['username']}}</h1>
-                <div class="admin-table">
+                <div class="admin-table" id="admin-table">
                 <table>
                     <thead>
                         <tr>
@@ -85,7 +99,7 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="order-table">
+                <div class="order-table" id="order-table" style="display:none;">
                     <table>
                         <thead>
                             <tr>
@@ -127,7 +141,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="order-table">
+                <div class="order-table" id="product-table" style="display:none;">
                     <table>
                         <thead>
                             <tr>
@@ -159,6 +173,10 @@
         </div>
 
     {% endif %}
-
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/tables.js') }}"></script>
 </body>
 </html>

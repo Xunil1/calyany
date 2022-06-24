@@ -1,5 +1,7 @@
+import json
+
 import werkzeug.security
-from flask import Flask, render_template, url_for, request, redirect, session
+from flask import Flask, render_template, url_for, request, redirect, session, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
@@ -59,10 +61,43 @@ class Products(db.Model):
 @app.route("/", methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        pass
+        name = request.form["name"]
+        address = request.form["address"]
+        phone = request.form["phone"]
+        messenger = request.form["messenger"]
+        comment = request.form["comment"]
+        deposit = "паспорт" if request.form["deposit"] == "passport" else "100$"
+        print(request.form)
+        order_el = ''
+        order_price = 0
+        for el in request.form:
+            if el.startswith('order_'):
+                product_id = el[6:]
+                if product_id == "extra-cup":
+                    order_el += "Доп.забивка х" + request.form[el] + ";"
+                    order_price += int(request.form[el]) * config.price["Доп.забивка"]
+                elif product_id == "calyan":
+                    order_el += "Кальян х" + request.form[el] + ";"
+                    order_price += int(request.form[el]) * config.price["Кальян"]
+                else:
+                    product = Products.query.filter_by(id=product_id).first()
+                    order_el += product.name + " x" + request.form[el] + ";"
+
+        order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today(), update_time=datetime.today())
+
+        try:
+            db.session.add(order)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "При добавлении пользователя произошла ошибка"
+
     else:
         products = Products.query.order_by(Products.time.desc()).all()
-        return render_template("index.html", products=products)
+        for_json = dict()
+        for el in products:
+            for_json[el.id] = el.name
+        return render_template("index.html", products=products, for_json=for_json)
 
 
 @app.route("/admin", methods=['POST', 'GET'])
