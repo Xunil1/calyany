@@ -59,6 +59,7 @@ def main_send(message):
                 state = "ordering"
                 order = dict()
                 question_state = 0
+                order_price = 0
                 bot.send_message(message.chat.id, questions[question_state], reply_markup=types.ReplyKeyboardRemove())
 
             elif message.text == 'Посмотреть товары 📦':
