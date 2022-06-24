@@ -164,42 +164,58 @@
                     <div class="cart__item">
                         <div class="cart__item__title">Имя</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="name">
+                            <input type="text" class="form__input" id="name" placeholder="Имя">
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Адрес</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="addr">
+                            <input type="text" class="form__input" id="addr" placeholder="Введите адрес">
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Грузинский номер телефона</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="phone">
+                            <input type="text" class="form__input" id="phone" placeholder="Начинается +995">
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Telegram или WhatsApp</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="telwhat">
+                            <input type="text" class="form__input" id="telwhat" placeholder="Как найти в Telegram или WhatsApp?">
                         </div>
                     </div>
                     <div class="cart__item"> 
                         <div class="cart__item__title">Комментарий к заказу</div>
                         <div class="cart__item__input">
-                            <input type="text" class="form__input" id="comment">
+                            <input type="text" class="form__input" id="comment" placeholder="Ваши пожелания">
                         </div>
                     </div>
                     <div class="cart__item">
                         <div class="cart__item__title">Оставлю в залог</div>
                         <div>
-                            <input type="radio" name="deposit" value="passport">
-                            300₾ или 100$
+                            <input type="radio" class="custom__radio" id="money" name="deposit" value="passport">
+                            <label for="money">300₾ или 100$</label>
                         </div>
                         <div>
-                            <input type="radio" name="deposit" value="money">
-                            Паспорт
+                            <input type="radio" class="custom__radio" id="passport" name="deposit" value="money">
+                             <label for="passport">Паспорт</label>
+                        </div>
+                    </div>
+                    <div class="order__prices">
+                        <div class="min__price">
+                            <div>Минимальный заказ: 30 GEL</div>
+                        </div>
+                        <div class="final__price">
+                            Сумма:
+                            <input type="hidden" value="">
+                        </div>
+                        <div class="cart__order">
+                            <div class="cart__order__text">
+                                <button type="submit" class="submit__button">
+                                    Заказать!
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
