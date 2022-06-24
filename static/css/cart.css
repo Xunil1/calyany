@@ -10,6 +10,7 @@
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     box-shadow: 0 0 7px #737272;
+    z-index: 10;
 }
 
 .cart__mini__img img {
