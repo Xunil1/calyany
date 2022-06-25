@@ -43,6 +43,9 @@ const renderCart = () => {
     if (Object.keys(cart).length > 0){
         $('#cart__mini').show()
     }
+    else{
+        $('#cart__mini').hide()
+    }
     console.log(cart)
     $('.cart_fullprice').empty()
     $('#cart__products').empty()
@@ -54,11 +57,16 @@ const renderCart = () => {
 	
 	Object.keys(cart).map(function(cart_el) {
 		if (cart_el === "calyan"){
-			html_products += '<div id="cart_el"> Кальян Количество: ' + cart[cart_el] + '</div>'
+			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Кальян</div>'
+            html_products += '<div class="cart_el_count"><div class="cart_el_button minus">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
+            html_products += '<div class="cart_el_button delete">×</div></div>'
+
 			price += cart[cart_el] * pricing[cart_el]
 		}
 		else if (cart_el === "extra-cup"){
-			html_products += '<div id="cart_el"> Доп.забивка Количество: ' + cart[cart_el] + '</div>'
+			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Дополнительная забивка</div>'
+            html_products += '<div class="cart_el_count"><div class="cart_el_button minus">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
+            html_products += '<div class="cart_el_button delete">×</div></div>'
 			price += cart[cart_el] * pricing[cart_el]
 		}
 		else{
