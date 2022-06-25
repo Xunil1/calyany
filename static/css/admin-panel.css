@@ -121,7 +121,9 @@ aside {
     color: #fff;
     font-size: 16px;
 }
-
+.active {
+    background-color: #2BD360;
+}
 .logout {
     background-color: #EF0F47;
 }

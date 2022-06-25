@@ -20,6 +20,11 @@ document.onclick = event => {
     }
     if (event.target.classList.contains('cart_show')) {
         $("#cart").toggle(200);
+        $("#cart__mini").toggle(200);
+    }
+    if (event.target.classList.contains('cart__exit')) {
+        $("#cart").toggle(200);
+        $("#cart__mini").toggle(15);
     }
     if (event.target.classList.contains('minus')) {
         minusFunction(event.target.dataset.id);

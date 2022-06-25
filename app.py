@@ -67,7 +67,6 @@ def index():
         messenger = request.form["messenger"]
         comment = request.form["comment"]
         deposit = "паспорт" if request.form["deposit"] == "passport" else "100$"
-        print(request.form)
         order_el = ''
         order_price = 0
         for el in request.form:
