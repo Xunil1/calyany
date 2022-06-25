@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="body overflow_hidden">
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script>const json = JSON.parse('{{ for_json | tojson | safe}}')</script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cookie.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/disclaimer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/event_listener.js') }}"></script>
     <div class="bg">
     </div>
     <div class="first-screen">
@@ -225,7 +231,7 @@
             </form>
         </div>
     </div>
-    <div class="disclaimer">
+    <div class="disclaimer" style="display:none">
         <div class="disclaimer__container">
             <div class="disclaimer__container__title">
                 <span>Сколько годиков Вам?</span>
@@ -254,14 +260,5 @@
             </div>
         </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.js"
-      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-      crossorigin="anonymous"></script>
-    <script>
-        const json = JSON.parse('{{ for_json | tojson | safe}}')
-        // console.log(json)
-    </script>
-    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 </body>
 </html>
