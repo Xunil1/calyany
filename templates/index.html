@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/hookah.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="body overflow_hidden">
     <div class="bg">
     </div>
     <div class="first-screen">
@@ -46,11 +46,9 @@
                       90 GEL  
                     </div> 
                 </div>
-                <a href="#">
                     <div class="hookah-cup-order add" data-id="calyan">
                         Заказать
                     </div>
-                </a>
             </div>      
             <div class="hookah-cup-container">
                 <div class="hookah-cup-img">
@@ -70,11 +68,9 @@
                       20 GEL  
                     </div> 
                 </div>
-                <a href="#">
                     <div class="hookah-cup-order add" data-id="extra-cup">
                         Добавить
                     </div>
-                </a>
             </div>
         </div>  
     </div>
@@ -227,6 +223,35 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="disclaimer">
+        <div class="disclaimer__container">
+            <div class="disclaimer__container__title">
+                <span>Сколько годиков Вам?</span>
+            </div>
+            <div class="disclaimer__container_description">
+                <p>Данный сайт является каталогом для совершеннолетних потребителей табачной продукции (старше 18 лет).</p>
+                <p>Сайт предоставляет информацию об основных потребительских свойстах и характеристиках табачной продукции и аксессуарах для курения.</p>
+                <p>Дистанционная продажа табака и табачных изделий не осуществляется.</p>
+                <p>Содержащаяся на сайте информация не является рекламой табака, табачной продукции и курительных пренадлежностей. Лицам, не достигшим совершеннолетия, пользование сайтом ЗАПРЕЩЕНО!</p>
+                <p>Помните, курение вредит вашему здоровью!</p>
+                <p>Продолжая просмотр сайта, Вы подтверждаете свое совершеннолетие.</p>
+            </div>
+            <div class="disclaimer__container__buttons">
+                <div class="disclaimer__button" id="disclaimer__confirm">
+                    <div class="disclaimer__button_text" id="disclaimer__confirm">
+                        Да, мне есть 18 лет
+                    </div>
+                </div>
+                <a href="/cat_page">
+                    <div class="disclaimer__button" id="disclaimer__cancel">
+                        <div class="disclaimer__button_text">
+                            Нет, мне нет 18 лет
+                        </div>
+                </div>
+                </a>                    
+            </div>
         </div>
     </div>
     <script

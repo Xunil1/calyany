@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    surname = db.Column(db.String(100), nullable=False) 
+    surname = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
@@ -172,6 +172,11 @@ def logout():
 @app.route("/legal_policy")
 def legal_policy():
     return render_template('legal_policy.html')
+
+
+@app.route("/cat_page")
+def cat_page():
+    return render_template('cat_page.html')
 
 
 def add_order_from_telegram(order):

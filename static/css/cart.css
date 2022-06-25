@@ -18,7 +18,20 @@
 }
 
 .cart__mini__counter {
-
+    display: flex;
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    color: #fff;
+    border:  3px solid red;
+    border-radius: 50%;
+    position: absolute;
+    background-color: red;
+    bottom: 2px;
+    right: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart__mini:hover {

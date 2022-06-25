@@ -72,6 +72,7 @@
     border: 30px;
     border-radius: 30px;
     border-color: black;
+    cursor: pointer;
 }
 
 .hookah-cup-order:hover, .hookah-cup-order a :hover {
