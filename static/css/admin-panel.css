@@ -123,6 +123,7 @@ aside {
 }
 .active {
     background-color: #2BD360;
+    transform: scale(1.05);
 }
 .logout {
     background-color: #EF0F47;

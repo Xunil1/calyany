@@ -8,10 +8,6 @@ let cart = {
 }
 
 
-//увеличение количества товара 
-//уменьшение количества товара
-//удаление товара 
-
 
 document.onclick = event => {
     console.log(event.target.classList)
@@ -21,10 +17,12 @@ document.onclick = event => {
     if (event.target.classList.contains('cart_show')) {
         $("#cart").toggle(200);
         $("#cart__mini").toggle(200);
+        $('#cart__mini').removeClass('cart_active');
     }
     if (event.target.classList.contains('cart__exit')) {
         $("#cart").toggle(200);
         $("#cart__mini").toggle(15);
+        $('#cart__mini').addClass('cart_active');
     }
     if (event.target.classList.contains('minus')) {
         minusFunction(event.target.dataset.id);
@@ -50,6 +48,7 @@ const addFunction = id => {
 	else {
 		cart[id] = 1
 	}
+	$('#cart__mini').addClass('cart_active');
     renderCart()
 }
 
@@ -74,8 +73,11 @@ const deleteFunction = id => {
 }
 
 const renderCart = () => {
+    let price = 0
     if (Object.keys(cart).length > 0){
-        $('#cart__mini').show()
+    	if ($('#cart__mini').hasClass("cart_active")){
+        	$('#cart__mini').show()
+    	}
     }
     else{
         $('#cart__mini').hide()
@@ -88,24 +90,25 @@ const renderCart = () => {
     $('.final__price').empty()
 	let html_products = ''
 	let html_products_inputs = ''
-	let price = 0
+
 	
 	Object.keys(cart).map(function(cart_el) {
 		if (cart_el === "calyan"){
 			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Кальян</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
-
-
 			price += cart[cart_el] * pricing[cart_el]
+			console.log(cart[cart_el])
 		}
 		else if (cart_el === "extra-cup"){
 			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Дополнительная забивка</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
 			price += cart[cart_el] * pricing[cart_el]
+			console.log(cart[cart_el])
 		}
 		else{
 		    html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">'+ json[cart_el] + '</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + 0 + ' GEL</div>'
+		    console.log(cart[cart_el])
 		}
 		html_products += '<div class="cart_el_button delete" data-id="'+ cart_el +'">×</div></div>'
 		html_products_inputs += '<input type="hidden" name="order_' + cart_el + '" id="order_' + cart_el + '" value="' + cart[cart_el] + '">'
@@ -118,6 +121,15 @@ const renderCart = () => {
 	let html_price = '<div>Сумма: ' + price + ' GEL</div>'
 	$('.final__price').append(html_price);
 	$('.cart_fullprice').append(html_price);
+
+    if (price < 30){
+        $('.submit__button').attr('disabled', true);
+    }
+    else{
+        $('.submit__button').removeAttr('disabled');
+
+    }
+
 }
 
 renderCart()
