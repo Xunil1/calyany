@@ -64,7 +64,7 @@ const renderCart = () => {
 			price += cart[cart_el] * pricing[cart_el]
 		}
 		else if (cart_el === "extra-cup"){
-			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Дополнительная забивка</div>'
+			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Дополнительная забивкаДополнительная забивка</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
             html_products += '<div class="cart_el_button delete">×</div></div>'
 			price += cart[cart_el] * pricing[cart_el]
@@ -79,7 +79,7 @@ const renderCart = () => {
 	$('#cart__products__inputs').append(html_products_inputs);
 
 
-	let html_price = 'Сумма: ' + price + ' GEL'
+	let html_price = '<div>Сумма: ' + price + ' GEL</div>'
 	$('.final__price').append(html_price);
 	$('.cart_fullprice').append(html_price);
 }
