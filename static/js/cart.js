@@ -40,7 +40,11 @@ const addFunction = id => {
 }
 
 const renderCart = () => {
+    if (Object.keys(cart).length > 0){
+        $('#cart__mini').show()
+    }
     console.log(cart)
+    $('.cart_fullprice').empty()
     $('#cart__products').empty()
     $('#cart__products__inputs').empty()
     $('.final__price').empty()
@@ -50,7 +54,7 @@ const renderCart = () => {
 	
 	Object.keys(cart).map(function(cart_el) {
 		if (cart_el === "calyan"){
-			html_products += '<div id="cart_el"> Кальян Количество: ' + cart[cart_el] + '</div>' 
+			html_products += '<div id="cart_el"> Кальян Количество: ' + cart[cart_el] + '</div>'
 			price += cart[cart_el] * pricing[cart_el]
 		}
 		else if (cart_el === "extra-cup"){
@@ -69,6 +73,7 @@ const renderCart = () => {
 
 	let html_price = 'Сумма: ' + price + ' GEL'
 	$('.final__price').append(html_price);
+	$('.cart_fullprice').append(html_price);
 }
 
 renderCart()
