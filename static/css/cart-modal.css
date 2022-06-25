@@ -173,6 +173,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 50% 50%;
+    cursor: pointer;
 }
 
 .custom__radio:checked+label::before {
@@ -261,3 +262,30 @@
     font-weight: 500;
     border: none;
 }
+
+.cart__exit {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #adacac;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    line-height: 1.35;
+    cursor: pointer;
+    color: #adacac;
+    margin: 0 10px;
+}
+
+.cart__exit:hover {
+    color:  red;
+    border-color:  red;
+    border-radius: 2px;
+    transform: scale(1.1);
+    transition: 100ms ease all;
+}
+
