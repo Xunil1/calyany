@@ -69,7 +69,7 @@
             
             <div class="admin-tools">
                 <h1>Это админ-панель, для {{session['username']}}</h1>
-                <div class="admin-table" id="admin-table">
+            <div class="admin-table" id="admin-table">
                 <table>
                     <thead>
                         <tr>
@@ -78,6 +78,7 @@
                             <th>Уникальное имя</th>
                             <th>E-mail</th>
                             <th>Время добавления</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,6 +91,12 @@
                                 <td>{{el.username}}</td>
                                 <td>{{el.email}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
+                                <td>
+                                    <div>
+                                        <button class="edit_table admin"  data-id="product_{{el.id}}">Изменить</button>
+                                        <button class="delete_table admin" data-id="product_{{el.id}}">Удалить</button>
+                                    </div>
+                                </td>
                             </tr>
 
                         {% endfor %}
@@ -113,6 +120,7 @@
                                 <th>Статус</th>
                                 <th>Время заказа</th>
                                 <th>Время обновления статуса</th>
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,6 +140,12 @@
                                 <td>{{el.status}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>{{el.update_time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
+                                <td>
+                                    <div>
+                                        <button class="edit_table order"  data-id="product_{{el.id}}">Изменить</button>
+                                        <button class="delete_table order" data-id="product_{{el.id}}">Удалить</button>
+                                    </div>
+                                </td>
                             </tr>
 
                             {% endfor %}
@@ -147,6 +161,7 @@
                                 <th>Описание</th>
                                 <th>Количество</th>
                                 <th>Время добавления</th>
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -158,6 +173,12 @@
                                 <td>{{el.description}}</td>
                                 <td>{{el.count}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
+                                <td>
+                                    <div>
+                                        <button class="edit_table product"  data-id="product_{{el.id}}">Изменить</button>
+                                        <button class="delete_table product" data-id="product_{{el.id}}">Удалить</button>
+                                    </div>
+                                </td>
                             </tr>
 
                             {% endfor %}
@@ -180,7 +201,7 @@
                 Добавление товара
             </div>
             <div class="editing__form">
-                <form method="POST">
+                <form id="add_product_form" action="">
                     <div class="editing__input__name">
                         <div class="editing__input__title">
                             Название
@@ -206,7 +227,7 @@
                         </div>
                     </div>
                     <div class="editing__input__submit__button">
-                        <input type="submit" value="Добавить">
+                        <input id="add_product_form_submit" type="button" value="Добавить">
                     </div>
                 </form>
             </div>
@@ -219,5 +240,6 @@
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/tables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </body>
 </html>

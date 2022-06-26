@@ -1,12 +1,9 @@
-import json
-
 import werkzeug.security
 from flask import Flask, render_template, url_for, request, redirect, session, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import os
 import config
-
+import time
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -125,7 +122,7 @@ def addAdmin():
         username = request.form['username']
         email = request.form['email']
         password = werkzeug.security.generate_password_hash(request.form['password'])
-        user_admin = Admin(name=name, surname=surname, username=username, email=email, password=password)
+        user_admin = Admin(name=name, surname=surname, username=username, email=email, password=password, time=datetime.today())
 
         try:
             db.session.add(user_admin)
@@ -140,27 +137,93 @@ def addAdmin():
             return render_template("add_admin.html")
 
 
-@app.route("/add_product", methods=['POST', 'GET'])
+@app.route("/add_product", methods=['POST'])
 def addProduct():
-    if request.method == 'POST':
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
         name = request.form['name']
         description = request.form['description']
-        price = request.form['price']
         count = request.form['count']
 
-        product = Products(name=name, description=description, price=price, count=count, time=datetime.today())
-
+        product = Products(name=name, description=description, count=count, time=datetime.today())
         try:
             db.session.add(product)
             db.session.commit()
-            return redirect('/admin')
+            return "added"
         except:
-            return "При добавлении карточки произошла ошибка"
+            return "error"
+
+
+
+@app.route("/admin/getUpdate/<int:time_interval>")
+def getUpdate(time_interval):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
     else:
-        if 'username' not in session:
-            return redirect('/admin')
+        print(time_interval)
+        update = False
+        admins = Admin.query.order_by(Admin.time.desc()).all()
+        for el in admins:
+            if (datetime.now() - el.time).total_seconds() < int(time_interval)/1000:
+                update = True
+                break
+        order = Order.query.order_by(Order.time.desc()).all()
+        for el in order:
+            if (datetime.now() - el.time).total_seconds() < int(time_interval)/1000:
+                update = True
+                break
+        products = Products.query.order_by(Products.time.desc()).all()
+        for el in products:
+            if (datetime.now() - el.time).total_seconds() < int(time_interval)/1000:
+                update = True
+                break
+        if update:
+            return {"status": "updated"}
         else:
-            return render_template("add_products.html")
+            return {"status": "no_update"}
+
+
+@app.route("/admin/deleteAdmin/<int:id>")
+def deleteAdmin(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        admin = Admin.query.get_or_404(id)
+        try:
+            db.session.delete(admin)
+            db.session.commit()
+            return {"status": "deleted"}
+        except:
+            return {"status": "no_deleted"}
+
+
+@app.route("/admin/deleteOrder/<int:id>")
+def deleteOrder(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        order = Order.query.get_or_404(id)
+        try:
+            db.session.delete(order)
+            db.session.commit()
+            return {"status": "deleted"}
+        except:
+            return {"status": "no_deleted"}
+
+
+@app.route("/admin/deleteProduct/<int:id>")
+def deleteProduct(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        product = Products.query.get_or_404(id)
+        try:
+            db.session.delete(product)
+            db.session.commit()
+            return {"status": "deleted"}
+        except:
+            return {"status": "no_deleted"}
 
 
 @app.route("/logout")
