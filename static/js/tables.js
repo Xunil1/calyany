@@ -43,9 +43,14 @@ document.onclick = event => {
         $('.editing_order').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
     }
+    if (event.target.classList.contains('edit_table_admin')) {
+        $('.editing_admin').removeClass('display_none');
+        $('.body').addClass('overflow_hidden');
+    }
     if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
         $('.editing').addClass('display_none');
         $('.adding').addClass('display_none');
+        $('.editing_admin').addClass('display_none');
         $('.editing_order').addClass('display_none');
         $('.body').removeClass('overflow_hidden');
     }

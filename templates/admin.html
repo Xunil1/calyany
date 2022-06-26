@@ -93,7 +93,7 @@
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
                                     <div class="edit__delete__buttons">
-                                        <button data-tooltip="Изменить" class="edit_table"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table"  data-id="ad_{{el.id}}"></button>
+                                        <button data-tooltip="Изменить" class="edit_table_admin"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table_admin"  data-id="ad_{{el.id}}"></button>
                                         <button data-tooltip="Удалить" class="delete_table"><img src="{{ url_for('static', filename='img/delete.png') }}" alt="" class="delete_table"  data-id="ad_{{el.id}}"></button>
                                     </div>
                                 </td>
@@ -282,8 +282,8 @@
             <div class="editing__order__form">
                 <form id="edit_order_form" action="">
                     <div class="editing__order__input">
-                            <input type="text" name="name" id="name" placeholder="Имя заказчика">
-                        </div>
+                        <input type="text" name="name" id="name" placeholder="Имя заказчика">
+                    </div>
                     <div class="editing__order__input">
                         <input type="text" name="address" id="address" placeholder="Адрес">
                     </div>
@@ -300,6 +300,35 @@
                         <input type="text" name="deposit" id="deposit" placeholder="Залог">
                     </div>
                     <div class="editing__order__input__submit__button">
+                        <input id="edit_order_form_submit" type="button" value="Изменить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="editing_admin display_none"> 
+        <div class="editing__admin__container">
+            <div class="exit_editing">
+                ×
+            </div>
+            <div class="editing__admin__title">
+                Изменение админа
+            </div>
+            <div class="editing__admin__form">
+                <form id="edit_admin_form" action="">
+                    <div class="editing__admin__input">
+                        <input type="text" name="name" id="name" placeholder="Имя">
+                    </div>
+                    <div class="editing__admin__input">
+                        <input type="text" name="surname" id="surname" placeholder="Фамилия">
+                    </div>
+                    <div class="editing__admin__input">
+                        <input type="text" name="username" id="username" placeholder="Уникальное имя">
+                    </div>
+                    <div class="editing__admin__input">
+                        <input type="text" name="email" id="email" placeholder="E-mail">
+                    </div>
+                    <div class="editing__admin__input__submit__button">
                         <input id="edit_order_form_submit" type="button" value="Изменить">
                     </div>
                 </form>
