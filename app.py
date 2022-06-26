@@ -60,7 +60,11 @@ def index():
         phone = request.form["phone"]
         messenger = request.form["messenger"]
         comment = request.form["comment"]
-        deposit = "паспорт" if request.form["deposit"] == "passport" else "100$"
+        print(request.form["deposit"])
+        if request.form["deposit"] == "passport":
+            deposit = "паспорт"
+        else:
+            deposit = "100$"
         order_el = ''
         order_price = 0
         for el in request.form:
@@ -151,6 +155,60 @@ def addProduct():
         except:
             return "error"
 
+
+@app.route("/edit_admin/<int:id>", methods=['POST'])
+def editAdmin(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        admin = Admin.query.get(id)
+        admin.name = request.form['name']
+        admin.surname = request.form['surname']
+        admin.username = request.form['username']
+        admin.email = request.form['email']
+
+        try:
+            db.session.commit()
+            return "edited"
+        except:
+            return "error"
+
+
+@app.route("/edit_order/<int:id>", methods=['POST'])
+def editOrder(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        order = Order.query.get(id)
+        order.name = request.form['name']
+        order.address = request.form['address']
+        order.phone = request.form['phone']
+        order.order_el = request.form['order_el']
+        order.comment = request.form['comment']
+        order.deposit = request.form['deposit']
+
+        try:
+            db.session.commit()
+            return "edited"
+        except:
+            return "error"
+
+
+@app.route("/edit_product/<int:id>", methods=['POST'])
+def editProduct(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        product = Products.query.get(id)
+        product.name = request.form['name']
+        product.description = request.form['description']
+        product.count = request.form['count']
+
+        try:
+            db.session.commit()
+            return "edited"
+        except:
+            return "error"
 
 
 @app.route("/admin/getUpdate/<int:time_interval>")
@@ -265,7 +323,7 @@ def getProduct(id):
         product = Products.query.get_or_404(id)
         for_js = {
             "name": product.name,
-            "decription": product.description,
+            "description": product.description,
             "count": product.count
         }
 

@@ -1,7 +1,7 @@
 
 
 $( document ).ready(function() {
-    interval_update_time = '5' //время в секундах
+    interval_update_time = '60' //время в секундах
     getUpdate(interval_update_time)
 });
 
@@ -38,14 +38,17 @@ document.onclick = event => {
     if (event.target.classList.contains('edit_table')) {
         $('.editing').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
+        edit_from_table(event.target.dataset.id);
     }
     if (event.target.classList.contains('edit_table_order')) {
         $('.editing_order').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
+        edit_from_table(event.target.dataset.id);
     }
     if (event.target.classList.contains('edit_table_admin')) {
         $('.editing_admin').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
+        edit_from_table(event.target.dataset.id);
     }
     if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
         $('.editing').addClass('display_none');
@@ -54,15 +57,11 @@ document.onclick = event => {
         $('.editing_order').addClass('display_none');
         $('.body').removeClass('overflow_hidden');
     }
-    if (event.target.classList.contains('edit_table')) {
-        $('.editing').removeClass('display_none');
-        $('.body').addClass('overflow_hidden');
-    }
     if (event.target.classList.contains('delete_table')) {
         delete_from_table(event.target.dataset.id);
     }
-    if (event.target.classList.contains('edit_table')) {
-        edit_from_table(event.target.dataset.id);
+    if (event.target.id == "edit_product_form_submit" || event.target.id == "edit_order_form_submit" || event.target.id == "edit_admin_form_submit") {
+        send_edited_data(event.target.dataset.id);
     }
 }
 
@@ -83,6 +82,7 @@ $("#add_product_form_submit").click(function(){
                     alert("Запись успешно добавлена!")
                     $('.adding').addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
+                    renderTables()
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
@@ -117,7 +117,54 @@ function delete_from_table(id){
         })
 }
 
+function send_edited_data(id){
+    path = ''
+    console.log(id)
+    if (id.slice(0,2) === "ad"){
+        path = "/edit_admin/" + id.slice(3)
+        form = $("#edit_admin_form")
+        modal = $(".editing_admin")
+    }
+    else{
+        if (id.slice(0,2) === "or"){
+            path = "/edit_order/" + id.slice(3)
+            form = $("#edit_order_form")
+            modal = $(".editing_order")
+        }
+        else{
+            path = "/edit_product/" + id.slice(3)
+            form = $("#edit_product_form")
+            modal = $(".editing")
+        }
+    }
+    $.ajax({
+		url: path,
+		method: 'post',
+		dataType: 'html',
+		data: form.serialize(),
+		success: function(data_add){
+		    console.log(data_add)
+		    if (data_add === "unauthorized_user"){
+                alert("Для дальнейших действий вам нужно авторизоваться!")
+            }
+            else{
+                if (data_add === "edited"){
+                    alert("Запись успешно изменена!")
+                    modal.addClass('display_none');
+                    $('.body').removeClass('overflow_hidden');
+                    renderTables()
+                }
+                else{
+                    alert("Произошла ошибка, пожалуйста попробуйте позже!")
+                }
+            }
+		}
+	});
+}
+
+
 function edit_from_table(id){
+    console.log(id)
     path = ''
     if (id.slice(0,2) === "ad"){
         path = "getAdmin"
@@ -133,11 +180,40 @@ function edit_from_table(id){
     }
     $.ajax('/admin/' + path + '/' + id.slice(3), {
             success: function(data){
+                console.log(id)
                 if (data["status"] != "unauthorized_user"){
-                    console.log(data)
+                    if (id.slice(0,2) === "ad"){
+                        let formAdmin = $("#edit_admin_form")
+                        formAdmin.find("#admin_name").val(data["name"])
+                        formAdmin.find("#admin_surname").val(data["surname"])
+                        formAdmin.find("#admin_username").val(data["username"])
+                        formAdmin.find("#admin_email").val(data["email"])
+                        formAdmin.find("#edit_admin_form_submit").attr("data-id", id)
+                    }
+                    else{
+                        if (id.slice(0,2) === "or"){
+                            let formOrder = $("#edit_order_form")
+                            formOrder.find("#name").val(data["name"])
+                            formOrder.find("#address").val(data["address"])
+                            formOrder.find("#phone").val(data["phone"])
+                            formOrder.find("#order_el").val(data["order_el"])
+                            formOrder.find("#comment").val(data["comment"])
+                            formOrder.find("#deposit").val(data["deposit"])
+                            formOrder.find("#edit_order_form_submit").attr("data-id", id)
+                        }
+                        else{
+                            let formProduct = $("#edit_product_form")
+                            formProduct.find("#edit_product_name").val(data["name"])
+                            formProduct.find("#edit_product_description").val(data["description"])
+                            formProduct.find("#edit_product_count").val(data["count"])
+                            formProduct.find("#edit_product_form_submit").attr("data-id", id)
+                        }
+
+                    }
                 }
             }
         })
+
 }
 
 
