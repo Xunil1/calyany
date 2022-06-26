@@ -32,17 +32,31 @@ document.onclick = event => {
         $('.show-product').addClass('active');
     }
     if (event.target.classList.contains('show_add_product')) {
+        $('.adding').removeClass('display_none');
+        $('.body').addClass('overflow_hidden');
+    }
+    if (event.target.classList.contains('edit_table')) {
         $('.editing').removeClass('display_none');
+        $('.body').addClass('overflow_hidden');
+    }
+    if (event.target.classList.contains('edit_table_order')) {
+        $('.editing_order').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
     }
     if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
         $('.editing').addClass('display_none');
+        $('.adding').addClass('display_none');
+        $('.editing_order').addClass('display_none');
         $('.body').removeClass('overflow_hidden');
+    }
+    if (event.target.classList.contains('edit_table')) {
+        $('.editing').removeClass('display_none');
+        $('.body').addClass('overflow_hidden');
     }
     if (event.target.classList.contains('delete_table')) {
         delete_from_table(event.target.dataset.id);
     }
-
+    
 }
 
 

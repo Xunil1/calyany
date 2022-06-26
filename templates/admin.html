@@ -141,7 +141,7 @@
                                 <td>{{el.update_time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
                                     <div class="edit__delete__buttons">
-                                        <button data-tooltip="Изменить" class="edit_table"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table"  data-id="or_{{el.id}}"></button>
+                                        <button data-tooltip="Изменить" class="edit_table_order"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table_order"  data-id="or_{{el.id}}"></button>
                                         <button data-tooltip="Удалить" class="delete_table"><img src="{{ url_for('static', filename='img/delete.png') }}" alt="" class="delete_table"  data-id="or_{{el.id}}"></button>
                                     </div>
                                 </td>
@@ -191,7 +191,7 @@
     {% endif %}
 
 
-    <div class="editing display_none">
+    <div class="adding display_none">
         <div class="editing__container">
             <div class="exit_editing">
                 ×
@@ -233,11 +233,85 @@
         </div>
     </div>      
 
+    <div class="editing display_none">
+        <div class="editing__container">
+            <div class="exit_editing">
+                ×
+            </div>
+            <div class="editing__title">
+                Изменение товара
+            </div>
+            <div class="editing__form">
+                <form id="add_product_form" action="">
+                    <div class="editing__input__name">
+                        <div class="editing__input__title">
+                            Название
+                        </div>
+                        <div class="editing__input__name__input">
+                            <input type="text" name="name" id="name" placeholder="Название товара">
+                        </div>
+                    </div>
+                    <div class="editing__input__description">
+                        <div class="editing__input__title">
+                            Описание
+                        </div>
+                        <div class="editing__input__description__input">
+                            <textarea name="description" id="description" placeholder="Описание товара"></textarea>
+                        </div>
+                    </div>
+                    <div class="editing__input__quantity">
+                        <div class="editing__input__title">
+                            Количество
+                        </div>
+                        <div class="editing__input__quantity__input">
+                            <input type="number" min="0" name="count" id="count" placeholder="Количество товара">
+                        </div>
+                    </div>
+                    <div class="editing__input__submit__button">
+                        <input id="add_product_form_submit" type="button" value="Изменить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+    <!-- display-none -->
+    <div class="editing_order display_none"> 
+        <div class="editing__order__container">
+            <div class="exit_editing">
+                ×
+            </div>
+            <div class="editing__order__title">
+                Изменение заказа
+            </div>
+            <div class="editing__order__form">
+                <form id="edit_order_form" action="">
+                    <div class="editing__order__input">
+                            <input type="text" name="name" id="name" placeholder="Имя заказчика">
+                        </div>
+                    <div class="editing__order__input">
+                        <input type="text" name="address" id="address" placeholder="Адрес">
+                    </div>
+                    <div class="editing__order__input">
+                        <input type="number" name="phone" id="phone" placeholder="Номер телефона">
+                    </div>
+                    <div class="editing__order__input">
+                        <input type="text" name="order_el" id="order_el" placeholder="Заказ">
+                    </div>
+                    <div class="editing__order__input">
+                        <input type="text" name="comment" id="comment" placeholder="Комментарий">
+                    </div>
+                    <div class="editing__order__input">
+                        <input type="text" name="deposit" id="deposit" placeholder="Залог">
+                    </div>
+                    <div class="editing__order__input__submit__button">
+                        <input id="edit_order_form_submit" type="button" value="Изменить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.js"
-      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-      crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tables.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </body>
