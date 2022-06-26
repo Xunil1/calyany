@@ -116,9 +116,7 @@
                                 <th>Залог</th>
                                 <th>Заказ</th>
                                 <th>Сумма заказа</th>
-                                <th>Статус</th>
                                 <th>Время заказа</th>
-                                <th>Время обновления статуса</th>
                                 <th>Действия</th>
                             </tr>
                         </thead>
@@ -136,9 +134,7 @@
                                 <td>{{el.deposit}}</td>
                                 <td>{{el.order_el}}</td>
                                 <td>{{el.order_price}}</td>
-                                <td>{{el.status}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
-                                <td>{{el.update_time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
                                     <div class="edit__delete__buttons">
                                         <button data-tooltip="Изменить" class="edit_table_order"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table_order"  data-id="or_{{el.id}}"></button>

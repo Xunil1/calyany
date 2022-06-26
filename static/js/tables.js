@@ -56,7 +56,9 @@ document.onclick = event => {
     if (event.target.classList.contains('delete_table')) {
         delete_from_table(event.target.dataset.id);
     }
-    
+    if (event.target.classList.contains('edit_table')) {
+        edit_from_table(event.target.dataset.id);
+    }
 }
 
 
@@ -67,18 +69,19 @@ $("#add_product_form_submit").click(function(){
 		dataType: 'html',
 		data: $("#add_product_form").serialize(),
 		success: function(data_add){
+		    console.log(data_add)
 		    if (data_add === "unauthorized_user"){
+                alert("Для дальнейших действий вам нужно авторизоваться!")
+            }
+            else{
                 if (data_add === "added"){
                     alert("Запись успешно добавлена!")
-                    $('.editing').addClass('display_none');
+                    $('.adding').addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
                 }
-            }
-            else{
-                alert("Для дальнейших действий вам нужно авторизоваться!")
             }
 		}
 	});
@@ -108,6 +111,31 @@ function delete_from_table(id){
             }
         })
 }
+
+function edit_from_table(id){
+    path = ''
+    if (id.slice(0,2) === "ad"){
+        path = "getAdmin"
+    }
+    else{
+        if (id.slice(0,2) === "or"){
+            path = "getOrder"
+        }
+        else{
+            path = "getProduct"
+        }
+
+    }
+    $.ajax('/admin/' + path + '/' + id.slice(3), {
+            success: function(data){
+                if (data["status"] != "unauthorized_user"){
+                    console.log(data)
+                }
+            }
+        })
+}
+
+
 
 
 function getUpdate(interval){

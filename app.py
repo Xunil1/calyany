@@ -35,9 +35,7 @@ class Order(db.Model):
     deposit = db.Column(db.String(100), nullable=False)
     order_el = db.Column(db.Text, nullable=False)
     order_price = db.Column(db.Float, default=0)
-    status = db.Column(db.String(100), default="Принят")
     time = db.Column(db.DateTime, nullable=False)
-    update_time = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
         return '<Order %r>' % self.name
@@ -47,7 +45,6 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(300), nullable=False)
-    price = db.Column(db.Float, default=0)
     count = db.Column(db.Integer, default=0)
     time = db.Column(db.DateTime, nullable=False)
 
@@ -79,7 +76,7 @@ def index():
                     product = Products.query.filter_by(id=product_id).first()
                     order_el += product.name + " x" + request.form[el] + "; "
 
-        order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today(), update_time=datetime.today())
+        order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
 
         try:
             db.session.add(order)
@@ -89,7 +86,7 @@ def index():
             return "При добавлении пользователя произошла ошибка"
 
     else:
-        products = Products.query.order_by(Products.time.desc()).all()
+        products = Products.query.filter(Products.count > 0).order_by(Products.time.desc()).all()
         for_json = dict()
         for el in products:
             for_json[el.id] = el.name
@@ -226,6 +223,56 @@ def deleteProduct(id):
             return {"status": "no_deleted"}
 
 
+@app.route("/admin/getAdmin/<int:id>")
+def getAdmin(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        admin = Admin.query.get_or_404(id)
+        for_js = {
+            "name": admin.name,
+            "surname": admin.surname,
+            "username": admin.username,
+            "email": admin.email
+        }
+
+        return for_js
+
+
+@app.route("/admin/getOrder/<int:id>")
+def getOrder(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        order = Order.query.get_or_404(id)
+        for_js = {
+            "name": order.name,
+            "address": order.address,
+            "phone": order.phone,
+            "comment": order.comment,
+            "deposit": order.deposit,
+            "order_el": order.order_el
+        }
+
+        return for_js
+
+
+@app.route("/admin/getProduct/<int:id>")
+def getProduct(id):
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
+        product = Products.query.get_or_404(id)
+        for_js = {
+            "name": product.name,
+            "decription": product.description,
+            "count": product.count
+        }
+
+        return for_js
+
+
+
 @app.route("/logout")
 def logout():
     session.pop('username', None)
@@ -243,7 +290,7 @@ def cat_page():
 
 
 def add_order_from_telegram(order):
-    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], order_price=order["order_price"], time=datetime.today(), update_time=datetime.today())
+    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], order_price=order["order_price"], time=datetime.today())
     try:
         db.session.add(order_to_bd)
         db.session.commit()
@@ -252,7 +299,7 @@ def add_order_from_telegram(order):
         return False
 
 def set_products_into_telegram():
-    products = Products.query.order_by(Products.time.desc()).all()
+    products = Products.query.filter(Products.count > 0).order_by(Products.time.desc()).all()
     return products
 
 
