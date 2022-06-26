@@ -5,7 +5,7 @@
     <title>Админ-панель</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="body">
     
     {% if not logIn %}
 
@@ -43,9 +43,7 @@
                         </form>
                     </div>
                     <div>
-                        <form action="/add_product" >
-                            <button class="button">Добавить товар</button>
-                        </form>
+                        <button class="button show_add_product">Добавить товар</button>
                     </div>
                     <div>
                         <form action="/logout" >
@@ -173,8 +171,11 @@
     {% endif %}
 
 
-    <div class="editing">
+    <div class="editing display_none">
         <div class="editing__container">
+            <div class="exit_editing">
+                ×
+            </div>
             <div class="editing__title">
                 Добавление товара
             </div>

@@ -24,4 +24,13 @@ document.onclick = event => {
         $("#product-table").show();
         $('.show-product').addClass('active');
     }
+    if (event.target.classList.contains('show_add_product')) {
+        $('.editing').removeClass('display_none');
+        $('.body').addClass('overflow_hidden');
+    }
+    if (event.target.classList.contains('exit_editing')) {
+        $('.editing').addClass('display_none');
+        $('.body').removeClass('overflow_hidden');
+    }
+
 }
