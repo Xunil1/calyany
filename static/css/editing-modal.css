@@ -43,7 +43,6 @@
 	display: flex;
 	justify-content: left;
 	margin-top: 20px;
-	margin-bottom: 20px;
 }
 
 .editing__input__name {
@@ -117,7 +116,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	border-radius: 30px;
-	margin :30px 160px 0px 160px;
+	margin :50px 160px 0px 160px;
 }
 
 .exit_editing {
