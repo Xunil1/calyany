@@ -147,7 +147,6 @@
                             <tr>
                                 <th>Название</th>
                                 <th>Описание</th>
-                                <th>Цена</th>
                                 <th>Количество</th>
                                 <th>Время добавления</th>
                             </tr>
@@ -159,7 +158,6 @@
                             <tr>
                                 <td>{{el.name}}</td>
                                 <td>{{el.description}}</td>
-                                <td>{{el.price}}</td>
                                 <td>{{el.count}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                             </tr>
@@ -173,6 +171,48 @@
         </div>
 
     {% endif %}
+
+
+    <div class="editing">
+        <div class="editing__container">
+            <div class="editing__title">
+                Добавление товара
+            </div>
+            <div class="editing__form">
+                <form method="POST">
+                    <div class="editing__input__name">
+                        <div class="editing__input__title">
+                            Название
+                        </div>
+                        <div class="editing__input__name__input">
+                            <input type="text" name="name" id="name" placeholder="Название товара">
+                        </div>
+                    </div>
+                    <div class="editing__input__description">
+                        <div class="editing__input__title">
+                            Описание
+                        </div>
+                        <div class="editing__input__description__input">
+                            <textarea name="description" id="description" placeholder="Описание товара"></textarea>
+                        </div>
+                    </div>
+                    <div class="editing__input__quantity">
+                        <div class="editing__input__title">
+                            Количество
+                        </div>
+                        <div class="editing__input__quantity__input">
+                            <input type="number" min="0" name="count" id="count" placeholder="Количество товара">
+                        </div>
+                    </div>
+                    <div class="editing__input__submit__button">
+                        <input type="submit" value="Добавить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>      
+
+
     <script
       src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
