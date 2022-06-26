@@ -182,7 +182,7 @@ def callback_inline(call):
                     for_order = ''
                     for el in order["order_el"]:
                         order_message += "     " + el + "\n"
-                        for_order += el + ";"
+                        for_order += el + "; "
 
                     order["order_el"] = for_order
 

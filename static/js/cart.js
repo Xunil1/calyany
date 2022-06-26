@@ -66,27 +66,20 @@ const renderCart = () => {
 			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Кальян</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
 			price += cart[cart_el] * pricing[cart_el]
-			console.log(cart[cart_el])
 		}
 		else if (cart_el === "extra-cup"){
 			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Дополнительная забивка</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
 			price += cart[cart_el] * pricing[cart_el]
-			console.log(cart[cart_el])
 		}
 		else{
 		    html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">'+ json[cart_el] + '</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + 0 + ' GEL</div>'
-		    console.log(cart[cart_el])
 		}
-
-		
-
 		html_products += '<div class="cart_el_button delete" data-id="'+ cart_el +'">×</div></div>'
 		html_products_inputs += '<input type="hidden" name="order_' + cart_el + '" id="order_' + cart_el + '" value="' + cart[cart_el] + '">'
 	    	
 	});
-
 	if (isNaN(cart['extra-cup']) === true) {
 		counter = cart['calyan']
 	}
@@ -96,7 +89,7 @@ const renderCart = () => {
 	else {
 		counter = cart['calyan'] + cart['extra-cup']
 	}
-	
+
 	html_cart_mini_counter += '<div>' + counter + '</div>'
 	$('#cart__products').append(html_products);
 	$('#cart__products__inputs').append(html_products_inputs);

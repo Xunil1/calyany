@@ -9,7 +9,7 @@ document.onclick = event => {
         $('#cart__mini').removeClass('cart_active');
 		$('.body').addClass('overflow_hidden');
     }
-    if (event.target.classList.contains('cart__exit')) {
+    if (event.target.classList.contains('cart__exit') || event.target.classList.contains('cart')) {
         $("#cart").toggle(200);
         $("#cart__mini").toggle(15);
         $('#cart__mini').addClass('cart_active');

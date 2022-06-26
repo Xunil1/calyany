@@ -35,7 +35,7 @@ document.onclick = event => {
         $('.editing').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
     }
-    if (event.target.classList.contains('exit_editing')) {
+    if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
         $('.editing').addClass('display_none');
         $('.body').removeClass('overflow_hidden');
     }
@@ -71,17 +71,28 @@ $("#add_product_form_submit").click(function(){
 });
 
 function delete_from_table(id){
-    console.log(id)
-//    $.ajax('/admin/getUpdate/' + interval + "000", {
-//            success: function(data){
-//                if (data["status"] != "unauthorized_user"){
-//                    if (data["status"] === "deleted"){
-//                        console.log(data)
-//                        renderTables()
-//                    }
-//                }
-//            }
-//        })}
+    path = ''
+    if (id.slice(0,2) === "ad"){
+        path = "deleteAdmin"
+    }
+    else{
+        if (id.slice(0,2) === "or"){
+            path = "deleteOrder"
+        }
+        else{
+            path = "deleteProduct"
+        }
+
+    }
+    $.ajax('/admin/' + path + '/' + id.slice(3), {
+            success: function(data){
+                if (data["status"] != "unauthorized_user"){
+                    if (data["status"] === "deleted"){
+                        renderTables()
+                    }
+                }
+            }
+        })
 }
 
 
@@ -91,7 +102,6 @@ function getUpdate(interval){
             success: function(data){
                 if (data["status"] != "unauthorized_user"){
                     if (data["status"] === "updated"){
-                        console.log(data)
                         renderTables()
                     }
                     getUpdate(interval)

@@ -70,14 +70,14 @@ def index():
             if el.startswith('order_'):
                 product_id = el[6:]
                 if product_id == "extra-cup":
-                    order_el += "Доп.забивка х" + request.form[el] + ";"
+                    order_el += "Доп.забивка х" + request.form[el] + "; "
                     order_price += int(request.form[el]) * config.price["Доп.забивка"]
                 elif product_id == "calyan":
-                    order_el += "Кальян х" + request.form[el] + ";"
+                    order_el += "Кальян х" + request.form[el] + "; "
                     order_price += int(request.form[el]) * config.price["Кальян"]
                 else:
                     product = Products.query.filter_by(id=product_id).first()
-                    order_el += product.name + " x" + request.form[el] + ";"
+                    order_el += product.name + " x" + request.form[el] + "; "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today(), update_time=datetime.today())
 
