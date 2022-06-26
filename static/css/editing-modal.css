@@ -119,6 +119,18 @@
 	margin :50px 160px 0px 160px;
 }
 
+.editing__input__submit__button input:hover {
+	transform: scale(1.1);
+	transition: 200ms all ease;
+	cursor: pointer;
+}
+
+.editing__input__submit__button input:not(:hover) {
+	transform: scale(1.0);
+	transition: 200ms all ease;
+	cursor: pointer;
+}
+
 .exit_editing {
 	 position: absolute;
     top: 30px;
@@ -147,3 +159,7 @@
     transition: 100ms ease all;
 }
 
+.exit_editing:not(:hover) {
+    transform: scale(1.0);
+    transition: 100ms ease all;
+}

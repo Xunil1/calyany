@@ -92,9 +92,9 @@
                                 <td>{{el.email}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
-                                    <div>
-                                        <button class="edit_table admin"  data-id="product_{{el.id}}">Изменить</button>
-                                        <button class="delete_table admin" data-id="product_{{el.id}}">Удалить</button>
+                                    <div class="edit__delete__buttons">
+                                        <button data-tooltip="Изменить" class="edit_table admin"  data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/edit.png') }}" alt=""></button>
+                                        <button data-tooltip="Удалить" class="delete_table admin" data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/delete.png') }}" alt=""></button>
                                     </div>
                                 </td>
                             </tr>
@@ -141,9 +141,9 @@
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>{{el.update_time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
-                                    <div>
-                                        <button class="edit_table order"  data-id="product_{{el.id}}">Изменить</button>
-                                        <button class="delete_table order" data-id="product_{{el.id}}">Удалить</button>
+                                    <div class="edit__delete__buttons">
+                                        <button data-tooltip="Изменить" class="edit_table order"  data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/edit.png') }}" alt=""></button>
+                                        <button data-tooltip="Удалить" class="delete_table order" data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/delete.png') }}" alt=""></button>
                                     </div>
                                 </td>
                             </tr>
@@ -174,9 +174,9 @@
                                 <td>{{el.count}}</td>
                                 <td>{{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</td>
                                 <td>
-                                    <div>
-                                        <button class="edit_table product"  data-id="product_{{el.id}}">Изменить</button>
-                                        <button class="delete_table product" data-id="product_{{el.id}}">Удалить</button>
+                                    <div class="edit__delete__buttons">
+                                        <button data-tooltip="Изменить" class="edit_table product"  data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/edit.png') }}" alt=""></button>
+                                        <button data-tooltip="Удалить" class="delete_table product" data-id="product_{{el.id}}"><img src="{{ url_for('static', filename='img/delete.png') }}" alt=""></button>
                                     </div>
                                 </td>
                             </tr>

@@ -11,4 +11,47 @@
 @import 'editing-modal.css';
 @import 'js-tools.css';
 
+.edit_table img, .delete_table img {
+	width: 20px;
+	height: 20px;
+	background: transparent;
+	border: none;
+}
+
+.edit__delete__buttons button, .delete_table button {
+	background-color: transparent;
+	border: none;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.edit__delete__buttons button:hover, .delete_table button:hover {
 	
+}
+	
+.edit__delete__buttons {
+	display: flex;
+	justify-content: space-around;	
+	position: relative;
+}
+
+[data-tooltip]::after {
+ 	content: attr(data-tooltip); /* Выводим текст */
+	position: absolute; /* Абсолютное позиционирование */
+	width: 80px; /* Ширина подсказки */
+	left: 0;
+	top: 0; /* Положение подсказки */
+	background: #fff; /* Синий цвет фона */
+	color: #000; /* Цвет текста */
+	padding: 0.5em; /* Поля вокруг текста */
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
+	pointer-events: none; /* Подсказка */
+	opacity: 0; /* Подсказка невидима */
+	transition: 500ms; /* Время появления подсказки */
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1; /* Показываем подсказку */
+    top: 2em; /* Положение подсказки */
+    z-index: 3;
+}

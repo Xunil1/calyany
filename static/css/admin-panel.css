@@ -165,6 +165,9 @@ aside {
     padding: 5px;
 }
 
+.order-table {
+    max-width: 90%; 
+}
 
 .order-table table {
     border: 1px solid black;
