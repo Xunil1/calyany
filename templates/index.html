@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="body overflow_hidden">
-    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
-    <script>const json = JSON.parse('{{ for_json | tojson | safe}}')</script>
-    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/cookie.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/disclaimer.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/event_listener.js') }}"></script>
+
     <div class="bg">
     </div>
     <div class="first-screen">
@@ -113,13 +108,13 @@
             <div class="first-end-message">
                 Обычно кальян привозим в течении одного часа после приема заказа. После получения заказа мы обязательно с вами спишемся-созвонимся в мессенджере или обычном звонке.
             </div>
-            <div class="second-end-message">
+            <!-- <div class="second-end-message">
                 Вы закончили формировать заказ
                 жмем по иконке корзины справа, оставляем контакты
                 и ждем доставочку!
             </div>
             <div class="sticker">                
-            </div>
+            </div> -->
             <div class="you-can-call-us">
                 Вы всегда можете нам написать и позвонить
             </div>
@@ -260,5 +255,11 @@
             </div>
         </div>
     </div>
+        <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script async>const json = JSON.parse('{{ for_json | tojson | safe}}')</script>
+    <script async src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/cookie.min.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/disclaimer.js') }}"></script>
+    <script async src="{{ url_for('static', filename='js/event_listener.js') }}"></script>
 </body>
 </html>

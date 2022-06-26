@@ -1,0 +1,160 @@
+@media screen and (max-width: 1200px) {
+
+	.title-first h1 {
+		font-size: 70px;
+	}
+
+}
+
+@media screen and (max-width: 992px) {
+
+	.title-first h1 {
+		font-size: 64px;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+
+	.title-first h1 {
+		font-size: 48px;
+	}
+
+
+}
+
+@media screen and (max-width: 576px) {
+
+	.title-first h1 {
+		font-size: 34px;
+	}
+
+	.title-second h2 {
+	    font-size: 24px;
+	    font-weight: 300;
+	    line-height: 1.5;
+	}
+
+	.hookah-cup-container {
+		width: 480px
+
+	}
+
+	.hookah-cup-title {
+
+	}
+
+	.hookah-cup-description {
+		margin-left: auto;
+		margin-right: auto;
+		word-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 470px) {
+
+	.title-first h1 {
+		font-size: 34px;
+	}
+
+	.title-second h2 {
+	    font-size: 24px;
+	    font-weight: 300;
+	    line-height: 1.5;
+	}
+
+	.hookah-cup-container {
+		width: 400px
+
+	}
+
+	.hookah-cup-title {
+
+	}
+
+	.hookah-cup-description {
+	}
+}
+
+@media screen and (max-width: 400px) {
+
+	.title-first h1 {
+		font-size: 34px;
+}
+
+	.title-second h2 {
+	    font-size: 24px;
+	    font-weight: 300;
+	    line-height: 1.5;
+}
+
+	.hookah-cup-container {
+		width: 350px
+
+}
+
+	.hookah-cup-title {
+
+}
+
+	.hookah-cup-description {
+}
+
+	.third-screen-title-main {
+	    font-size: 36px;
+	    line-height: 1.5;
+	    font-weight: 600;
+	    margin-bottom: 20px
+}
+	.third-screen-title-description {
+	    max-width: 350px;
+	    font-size: 20px;
+	    text-align: center;
+}
+	.you-can-call-us {
+		font-size: 22px;
+	}
+
+	footer {
+	padding: 7px
+}
+
+	.legal-policy a {
+		font-size: 12px;
+	}
+
+	.cart__mini {
+    top: 30px;
+    right: 20px;
+}
+	.hookah-cup-img img {
+	    width: 100%;
+}
+
+	.order__prices {
+		font-size: 18px;
+	}
+
+	.disclaimer__container {
+		width: 350px;
+		overflow: auto;
+	}
+
+	.disclaimer__container__title {
+		font-size: 22px;
+	}
+
+	.disclaimer__container_description {
+		font-size: 14px;
+	}
+
+	.disclaimer__container__buttons {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.disclaimer__button {
+		margin-bottom: 20px;
+	}
+
+}
