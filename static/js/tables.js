@@ -73,11 +73,20 @@ document.onclick = event => {
 
 
 $("#add_product_form_submit").click(function(){
-	$.ajax({
-		url: '/add_product',
+    send_adding_data('/add_product', $("#add_product_form"), $('.adding'))
+});
+
+$("#add_admin_form_submit").click(function(){
+	send_adding_data('/add_admin', $("#add_admin_form"), $('.adding_admin'))
+});
+
+
+function send_adding_data(path, form, modal){
+    $.ajax({
+		url: path,
 		method: 'post',
 		dataType: 'html',
-		data: $("#add_product_form").serialize(),
+		data: form.serialize(),
 		success: function(data_add){
 		    console.log(data_add)
 		    if (data_add === "unauthorized_user"){
@@ -86,7 +95,7 @@ $("#add_product_form_submit").click(function(){
             else{
                 if (data_add === "added"){
                     alert("Запись успешно добавлена!")
-                    $('.adding').addClass('display_none');
+                    modal.addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
                     renderTables()
                 }
@@ -96,7 +105,8 @@ $("#add_product_form_submit").click(function(){
             }
 		}
 	});
-});
+}
+
 
 function delete_from_table(id){
     path = ''
@@ -247,7 +257,7 @@ function renderTables(){
         let order_table = document.find("#order-table").find("table");
         let product_table = document.find("#product-table").find("table");
         $( "#admin-table" ).html(admin_table);
-        $( "#order-table" ).html(order_table);
+        $( ".order__cards" ).html(order_table);
         $( "#product-table" ).html(product_table);
       });
 }

@@ -1,5 +1,3 @@
-import time
-
 import telebot
 import config
 from telebot import types
@@ -154,11 +152,11 @@ def callback_inline(call):
 
                 flag = True
                 for el in order["order_el"]:
-                    if call.data == el[:-3]:
-                        order["order_el"][order["order_el"].index(el)] = el[:-1] + str(int(el[-1]) + 1)
+                    if call.data == el[:el.index("×")-1]:
+                        order["order_el"][order["order_el"].index(el)] = el[:el.index("×") + 1] + str(int(el[el.index("×")+1:]) + 1)
                         flag = False
                 if flag:
-                    order["order_el"].append(call.data + " x1")
+                    order["order_el"].append(call.data + " ×1")
 
                 item1 = types.InlineKeyboardButton("Да", callback_data="yes")
                 item2 = types.InlineKeyboardButton("Нет", callback_data="no")

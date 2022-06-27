@@ -3,14 +3,13 @@ from flask import Flask, render_template, url_for, request, redirect, session, j
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import config
-import time
+import telegram_new_admin
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = config.SECRET_KEY
 db = SQLAlchemy(app)
-
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,17 +70,28 @@ def index():
             if el.startswith('order_'):
                 product_id = el[6:]
                 if product_id == "extra-cup":
-                    order_el += "Доп.забивка х" + request.form[el] + "; "
+                    order_el += "Доп.забивка ×" + request.form[el] + "; "
                     order_price += int(request.form[el]) * config.price["Доп.забивка"]
                 elif product_id == "calyan":
-                    order_el += "Кальян х" + request.form[el] + "; "
+                    order_el += "Кальян ×" + request.form[el] + "; "
                     order_price += int(request.form[el]) * config.price["Кальян"]
                 else:
                     product = Products.query.filter_by(id=product_id).first()
-                    order_el += product.name + " x" + request.form[el] + "; "
+                    order_el += product.name + " ×" + request.form[el] + "; "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
-
+        telegram_new_admin.send_message(
+            {
+                "id": order.id,
+                "name": name,
+                "address": address,
+                "phone": phone,
+                "messenger": messenger,
+                "comment": comment,
+                "order_el": order_el,
+                "order_price": order_price
+            }
+        )
         try:
             db.session.add(order)
             db.session.commit()
@@ -115,27 +125,25 @@ def admin():
         return render_template("admin.html", logIn=logIn, admins=admins, orders=orders, products=products)
 
 
-@app.route("/add_admin", methods=['POST', 'GET'])
+@app.route("/add_admin", methods=['POST'])
 def addAdmin():
-    if request.method == 'POST':
+    if 'username' not in session:
+        return {"status": "unauthorized_user"}
+    else:
         name = request.form['name']
         surname = request.form['surname']
         username = request.form['username']
         email = request.form['email']
         password = werkzeug.security.generate_password_hash(request.form['password'])
-        user_admin = Admin(name=name, surname=surname, username=username, email=email, password=password, time=datetime.today())
+        user_admin = Admin(name=name, surname=surname, username=username, email=email, password=password,
+                           time=datetime.today())
 
         try:
             db.session.add(user_admin)
             db.session.commit()
-            return redirect('/admin')
+            return "added"
         except:
-            return "При добавлении пользователя произошла ошибка"
-    else:
-        if 'username' not in session:
-            return redirect('/admin')
-        else:
-            return render_template("add_admin.html")
+            return "error"
 
 
 @app.route("/add_product", methods=['POST'])

@@ -50,6 +50,7 @@ const renderCart = () => {
     else{
         $('#cart__mini').hide()
         $('#cart').hide()
+        $('.body').removeClass('overflow_hidden');
     }
     console.log(cart)
     $('.cart_fullprice').empty()

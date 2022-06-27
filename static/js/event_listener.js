@@ -24,7 +24,7 @@ document.onclick = event => {
     if (event.target.classList.contains('delete')) {
         deleteFunction(event.target.dataset.id);
     }
-    if (event.target.id == 'disclaimer__confirm') {
+    if (event.target.id == 'disclaimer__confirm' || event.target.classList.contains('disclaimer__button_text')) {
 		setCookie("disclaimer", "shown")
 		$('.body').removeClass('overflow_hidden');
 		$('.disclaimer').hide()
