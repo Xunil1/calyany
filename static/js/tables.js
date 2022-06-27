@@ -254,7 +254,7 @@ function renderTables(){
     $.get("/admin").done(function(response){
         let document=$(response);
         let admin_table = document.find("#admin-table").find("table");
-        let order_table = document.find("#order-table").find("table");
+        let order_table = document.find(".order__cards");
         let product_table = document.find("#product-table").find("table");
         $( "#admin-table" ).html(admin_table);
         $( ".order__cards" ).html(order_table);
