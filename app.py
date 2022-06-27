@@ -3,7 +3,6 @@ from flask import Flask, render_template, url_for, request, redirect, session, j
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import config
-import telegram_new_admin
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -80,18 +79,18 @@ def index():
                     order_el += product.name + " ×" + request.form[el] + "; "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
-        telegram_new_admin.send_message(
-            {
-                "id": order.id,
-                "name": name,
-                "address": address,
-                "phone": phone,
-                "messenger": messenger,
-                "comment": comment,
-                "order_el": order_el,
-                "order_price": order_price
-            }
-        )
+        # telegram_new_admin.send_message(
+        #     {
+        #         "id": order.id,
+        #         "name": name,
+        #         "address": address,
+        #         "phone": phone,
+        #         "messenger": messenger,
+        #         "comment": comment,
+        #         "order_el": order_el,
+        #         "order_price": order_price
+        #     }
+        # )
         try:
             db.session.add(order)
             db.session.commit()
