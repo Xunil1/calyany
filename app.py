@@ -10,6 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = config.SECRET_KEY
 db = SQLAlchemy(app)
 
+
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -79,7 +80,7 @@ def index():
                     order_el += product.name + " ×" + request.form[el] + "; "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
-        # telegram_new_admin.send_message(
+        # send_message(
         #     {
         #         "id": order.id,
         #         "name": name,
@@ -366,6 +367,28 @@ def add_order_from_telegram(order):
 def set_products_into_telegram():
     products = Products.query.filter(Products.count > 0).order_by(Products.time.desc()).all()
     return products
+
+
+def set_orders_into_telegram(time_interval):
+    orders = []
+    order = Order.query.order_by(Order.time.desc()).all()
+    for el in order:
+        if (datetime.now() - el.time).total_seconds() < int(time_interval):
+            orders.append(
+                {
+                    "id": el.id,
+                    "name": el.name,
+                    "address": el.address,
+                    "phone": el.phone,
+                    "messenger": el.messenger,
+                    "comment": el.comment,
+                    "order_el": el.order_el,
+                    "order_price": el.order_price
+                }
+            )
+        else:
+            break
+    return orders
 
 
 if __name__ == "__main__":

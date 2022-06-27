@@ -90,7 +90,9 @@ document.onclick = event => {
     
     
 }
-
+$(".button_logout").click(function(){
+    log_out('/add_product', $("#add_product_form"), $('.adding'))
+});
 
 $("#add_product_form_submit").click(function(){
     send_adding_data('/add_product', $("#add_product_form"), $('.adding'))
@@ -125,6 +127,15 @@ function send_adding_data(path, form, modal){
             }
 		}
 	});
+}
+
+
+function log_out(){
+    $.ajax('/logout', {
+            success: function(data){
+                location.reload();
+            }
+        })
 }
 
 

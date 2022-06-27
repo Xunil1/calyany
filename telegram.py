@@ -1,14 +1,15 @@
 import telebot
 import config
 from telebot import types
-import app
+import time
+from app import set_products_into_telegram, add_order_from_telegram, set_orders_into_telegram
 
 
 
-global order
+order = {}
 bot = telebot.TeleBot(config.TOKEN)
 
-state = "default"
+state = {}
 questions = {
     "name": "Ваше имя?",
     "address": "На какой адрес желаете заказать?",
@@ -28,7 +29,7 @@ keys_on_rus = {
     "order_el": "Заказ"
     }
 
-order_price = 0
+order_price = {}
 
 
 def create_keyboard():
@@ -41,21 +42,33 @@ def create_keyboard():
 
 
 def create_keyboard_products():
-    products = app.set_products_into_telegram()
+    products = set_products_into_telegram()
     items = []
     for el in products:
         items.append(types.InlineKeyboardButton(el.name, callback_data=el.name))
-    markup = types.InlineKeyboardMarkup(row_width=4)
+    markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(*items)
     return markup
 
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
+    global state
     bot.send_message(message.chat.id,
                      "Добро пожаловать! Я бот по заказу кальянов на дом. Благодаря мне ты можешь с легкостью забронировать кальян на нужное тебе время!",
                      parse_mode='html',
                      reply_markup=create_keyboard())
+    state[message.chat.id] = "default"
+
+
+@bot.message_handler(commands=['start_send_order'])
+def start_send_order(message):
+    # chat_id = message.chat.id
+    # file = open("id.txt", "w")
+    # file.write(str(chat_id))
+    # file.close()
+    last_time = time.time()
+    send_message(20)
 
 
 @bot.message_handler(commands=['help'])
@@ -69,11 +82,11 @@ def main_send(message):
     global state
     global order
     global order_price
-    if state == "default":
+    if state[message.chat.id] == "default":
         if message.chat.type == 'private':
             if message.text == 'Заказать ✅':
-                state = "ordering"
-                order = {
+                state[message.chat.id] = "ordering"
+                order[message.chat.id] = {
                     "name": "",
                     "address": "",
                     "phone": "",
@@ -83,12 +96,12 @@ def main_send(message):
                     "messenger": "",
                     "order_price": 30
                 }
-                order["messenger"] = "@" + message.chat.username
-                order_price = 0
+                order[message.chat.id]["messenger"] = "@" + message.chat.username
+                order_price[message.chat.id] = 0
                 bot.send_message(message.chat.id, questions["name"], reply_markup=types.ReplyKeyboardRemove())
 
             elif message.text == 'Посмотреть товары 📦':
-                products = app.set_products_into_telegram()
+                products = set_products_into_telegram()
                 message_products = ''
                 k = 1
                 for el in products:
@@ -99,25 +112,25 @@ def main_send(message):
             else:
                 bot.send_message(message.chat.id, 'Я тебя немного не понял, попробуй написать /help')
     else:
-        if order["name"] == "":
-            order["name"] = message.text
+        if order[message.chat.id]["name"] == "":
+            order[message.chat.id]["name"] = message.text
             bot.send_message(message.chat.id, questions["address"])
-        elif order["address"] == "":
-            order["address"] = message.text
+        elif order[message.chat.id]["address"] == "":
+            order[message.chat.id]["address"] = message.text
             bot.send_message(message.chat.id, questions["phone"])
-        elif order["phone"] == "":
-            order["phone"] = message.text
+        elif order[message.chat.id]["phone"] == "":
+            order[message.chat.id]["phone"] = message.text
             bot.send_message(message.chat.id, questions["comment"])
-        elif order["comment"] == "":
-            order["comment"] = message.text
+        elif order[message.chat.id]["comment"] == "":
+            order[message.chat.id]["comment"] = message.text
             markup = types.InlineKeyboardMarkup(row_width=2)
             item1 = types.InlineKeyboardButton("Паспорт 📕", callback_data="паспорт")
             item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
             markup.add(item1, item2)
             bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
-        elif order["deposit"] == "":
+        elif order[message.chat.id]["deposit"] == "":
             if message.text in ["паспорт", "100$"]:
-                order["deposit"] = message.text
+                order[message.chat.id]["deposit"] = message.text
                 bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
             else:
                 bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
@@ -126,7 +139,7 @@ def main_send(message):
                 item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
                 markup.add(item1, item2)
                 bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
-        elif state == "make_choice":
+        elif state[message.chat.id] == "make_choice":
             bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
             bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
 
@@ -134,29 +147,29 @@ def main_send(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     global state
-    products = app.set_products_into_telegram()
+    products = set_products_into_telegram()
     products_list = []
     for el in products:
         products_list.append(el.name)
     try:
         if call.message:
             if call.data == "паспорт" or call.data == "100$":
-                order["deposit"] = call.data
+                order[call.message.chat.id]["deposit"] = call.data
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=call.message.text, reply_markup=None)
                 bot.send_message(call.message.chat.id, "В залог будет оставлен: " + call.data)
                 bot.send_message(call.message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
-                state = "make_choice"
+                state[call.message.chat.id] = "make_choice"
 
             elif call.data in products_list:
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=call.data + " добавлена в чашу.", reply_markup=None)
 
                 flag = True
-                for el in order["order_el"]:
+                for el in order[call.message.chat.id]["order_el"]:
                     if call.data == el[:el.index("×")-1]:
-                        order["order_el"][order["order_el"].index(el)] = el[:el.index("×") + 1] + str(int(el[el.index("×")+1:]) + 1)
+                        order[call.message.chat.id]["order_el"][order[call.message.chat.id]["order_el"].index(el)] = el[:el.index("×") + 1] + str(int(el[el.index("×")+1:]) + 1)
                         flag = False
                 if flag:
-                    order["order_el"].append(call.data + " ×1")
+                    order[call.message.chat.id]["order_el"].append(call.data + " ×1")
 
                 item1 = types.InlineKeyboardButton("Да", callback_data="yes")
                 item2 = types.InlineKeyboardButton("Нет", callback_data="no")
@@ -174,19 +187,19 @@ def callback_inline(call):
 
                     for el in keys_on_rus:
                         if el != "order_el":
-                            message_for_user += keys_on_rus[el] + ": " + order[el] + "\n"
+                            message_for_user += keys_on_rus[el] + ": " + order[call.message.chat.id][el] + "\n"
 
                     order_message = ''
                     for_order = ''
-                    for el in order["order_el"]:
+                    for el in order[call.message.chat.id]["order_el"]:
                         order_message += "     " + el + "\n"
                         for_order += el + "; "
 
-                    order["order_el"] = for_order
+                    order[call.message.chat.id]["order_el"] = for_order
 
                     message_for_user += keys_on_rus["order_el"] + ": \n" + order_message + "\n"
 
-                    state = "default"
+                    state[call.message.chat.id] = "default"
 
                     markup = types.InlineKeyboardMarkup(row_width=2)
                     item1 = types.InlineKeyboardButton("Подтвердить ✅", callback_data="confirm")
@@ -198,14 +211,33 @@ def callback_inline(call):
             elif call.data == "confirm" or call.data == "cancel":
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=call.message.text, reply_markup=None)
                 if call.data == "confirm":
-                    if app.add_order_from_telegram(order):
+                    if add_order_from_telegram(order[call.message.chat.id]):
                         bot.send_message(call.message.chat.id, "Ваш заказ успешно сформирован. В ближайшее время с Вами свяжется наш менеджер.", reply_markup=create_keyboard())
                     else:
                         bot.send_message(call.message.chat.id, "Извините, при оформлении заказа произошла ошибка. Повторите попытку заказа немного позже.", reply_markup=create_keyboard())
+                    state[call.message.chat.id] = "default"
+                    order.pop(call.message.chat.id, None)
                 else:
                     bot.send_message(call.message.chat.id, "Начните все заново!", reply_markup=create_keyboard())
     except Exception as e:
         print(repr(e))
+
+
+def send_message(time_out):
+    last_time = time.time()
+    while True:
+        if time.time() - last_time > time_out:
+            file = open("id.txt", "r")
+            chat_id = file.read()
+            file.close()
+            orders = set_orders_into_telegram(time_out)
+            if len(orders) != 0:
+                for el in orders:
+                    message = "Номер заказа: #" + str(el["id"]) + "\nЗаказ: " + str(el["order_el"]) + "\nИмя: " + str(el["name"]) + "\nАдрес: " + str(el["address"]) + "\nТелефон: " + str(el["phone"]) + "\nМессенджер: " + str(el["messenger"]) + "\nКомментарий: " + str(el["comment"]) + "\nОбщая стоимость: " + str(el["order_price"])
+                    bot.send_message(int(chat_id), message)
+
+            last_time = time.time()
+
 
 
 bot.polling(none_stop=True)
