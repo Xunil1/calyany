@@ -32,7 +32,7 @@ document.onclick = event => {
         $('.show-product').addClass('active');
     }
     if (event.target.classList.contains('show_add_product')) {
-        $('.adding').removeClass('display_none');
+        $('.adding__product').removeClass('display_none');
         $('.body').addClass('overflow_hidden');
     }
     if (event.target.classList.contains('edit_table')) {
@@ -57,7 +57,7 @@ document.onclick = event => {
     
     if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
         $('.editing').addClass('display_none');
-        $('.adding').addClass('display_none');
+        $('.adding__product').addClass('display_none');
         $('.editing_admin').addClass('display_none');
         $('.editing_order').addClass('display_none');
         $('.adding_admin').addClass('display_none');
@@ -69,6 +69,26 @@ document.onclick = event => {
     if (event.target.id == "edit_product_form_submit" || event.target.id == "edit_order_form_submit" || event.target.id == "edit_admin_form_submit") {
         send_edited_data(event.target.dataset.id);
     }
+
+    if (event.target.classList.contains('show__aside') && !($('.aside').hasClass('aside__position__absolute'))) {
+        $('.aside').removeClass('aside__display__none');
+        $('.aside').addClass('aside__position__absolute');
+    }
+    else if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
+        $('.aside').addClass('aside__display__none');
+        $('.aside').removeClass('aside__position__absolute');
+    }
+
+    // if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
+    //     $('.aside').addClass('aside__display__none');
+    //     $('.aside').removeClass('aside__position__absolute');
+    // }
+    // if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__display__none')) {
+    //     $('.aside').removeClass('aside__display__none');
+    //     $('.aside').addClass('aside__position__absolute');
+    // }
+    
+    
 }
 
 

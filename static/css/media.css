@@ -23,6 +23,34 @@
 
 }
 
+
+
+@media screen and (max-width: 670px) {
+
+	.aside__display__none {
+		display: none;
+	}
+
+	.order__cards {
+		justify-content: center
+	}
+	.order__card {
+		margin: 70px 0 0 0;
+	}
+	.show__aside {
+		display:  block;
+	}
+	#show__aside {
+		display: block;
+	}
+}
+
+
+
+
+
+
+
 @media screen and (max-width: 576px) {
 
 	.title-first h1 {

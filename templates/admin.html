@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1">
     <title>Админ-панель</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/hookah.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -32,7 +33,7 @@
     {% else %}
 
         <div class="admin-body">
-            <aside class="aside">
+            <aside class="aside aside__display__none">
                 <div class="admin__buttons">
                     <div class="show-order show__button active">
                         Заказы
@@ -58,7 +59,7 @@
                 <div class="order__card">
 
                     <div class="order__item">
-                        Номер заказа: {{el.id}} 
+                        Номер заказа: #{{el.id}} 
                     <div class="edit__delete__buttons">
                         <button data-tooltip="Изменить" class="edit_table_order"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table_order"  data-id="or_{{el.id}}"></button>
                         <button data-tooltip="Удалить" class="delete_table"><img src="{{ url_for('static', filename='img/delete.png') }}" alt="" class="delete_table"  data-id="or_{{el.id}}"></button>
@@ -196,45 +197,49 @@
                     </table>
                 </div>
             </div>
+            <div class="show__aside display_none" id="show__aside">
+                <img class="show__aside" src="{{ url_for('static', filename='img/nav.png') }}" alt="">
+            </div>
+            <!-- end admin-body -->
         </div>
     {% endif %}
 
 
-    <div class="adding display_none">
-        <div class="editing__container">
+    <div class="adding__product display_none">
+        <div class="adding__product__container">
             <div class="exit_editing">
                 ×
             </div>
-            <div class="editing__title">
+            <div class="adding__product__title">
                 Добавление товара
             </div>
-            <div class="editing__form">
+            <div class="adding__product__form">
                 <form id="add_product_form" action="">
-                    <div class="editing__input__name">
-                        <div class="editing__input__title">
+                    <!-- <div class="adding__product__input__name"> -->
+                        <!-- <div class="editing__input__title">
                             Название
-                        </div>
-                        <div class="editing__input__name__input">
+                        </div> -->
+                        <div class="adding__product__input__name__input">
                             <input type="text" name="name" id="add_product_name" placeholder="Название товара">
                         </div>
-                    </div>
-                    <div class="editing__input__description">
-                        <div class="editing__input__title">
+                    <!-- </div> -->
+                    <!-- <div class="editing__input__description"> -->
+                       <!--  <div class="editing__input__title">
                             Описание
-                        </div>
-                        <div class="editing__input__description__input">
+                        </div> -->
+                        <div class="adding__product__input__description__input">
                             <textarea name="description" id="add_product_description" placeholder="Описание товара"></textarea>
                         </div>
-                    </div>
-                    <div class="editing__input__quantity">
-                        <div class="editing__input__title">
+                    <!-- </div> -->
+                    <!-- <div class="adding__product__input__quantity"> -->
+                        <!-- <div class="editing__input__title">
                             Количество
-                        </div>
-                        <div class="editing__input__quantity__input">
+                        </div> -->
+                        <div class="adding__product__input__quantity__input">
                             <input type="number" min="0" name="count" id="add_product_count" placeholder="Количество товара">
                         </div>
-                    </div>
-                    <div class="editing__input__submit__button">
+                    <!-- </div> -->
+                    <div class="adding__input__submit__button">
                         <input id="add_product_form_submit" type="button" value="Добавить">
                     </div>
                 </form>

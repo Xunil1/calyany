@@ -1,4 +1,4 @@
-.editing {
+.adding__product {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -7,13 +7,13 @@
 	right: 0;
 	background-color: rgba(80, 84, 93, 0.9);
 	width: 100%;
-	height: 100vh;
+	height: 100vh;	
 }
 
-.editing__container {
+.adding__product__container {
 	position: relative;
 	width: 730px;
-	height: 900px;
+	height: 770px;
 	display: flex;
 	flex-direction: column;
 	justify-content: top;
@@ -23,7 +23,7 @@
 	padding: 40px 95px;
 }
 
-.editing__title {
+.adding__product__title {
 	width: 540px;
 	height: 60px;
 	display: flex;
@@ -37,7 +37,7 @@
 	background-color: #E3BCA2;
 }
 
-.editing__form {
+.adding__product__form {
 	width: 540px;
 	height: 770px;
 	display: flex;
@@ -45,29 +45,7 @@
 	margin-top: 20px;
 }
 
-.editing__input__name {
-	display: flex;
-	flex-direction: column;
-	width: 540px;
-	height: 120px;
-	margin-bottom: 30px;
-}
-
-.editing__input__title {
-	width: 255px;
-	height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 30px;
-	background-color: #fff;
-	margin-bottom: 10px;
-	font-family: 'Roboto', sans-serif;
-	font-size: 24px;
-	font-weight: 600;
-}
-
-.editing__input__name__input input {
+.adding__product__input__name__input input {
 	width: 540px;
 	height: 60px;
 	border-radius: 30px;
@@ -76,13 +54,10 @@
 	font-size: 16px;
 	border: none;
 	padding: 10px;
-}
-
-.editing__input__description {
 	margin-bottom: 30px;
 }
 
-.editing__input__description__input textarea {
+.adding__product__input__description__input textarea{
 	width: 540px;
 	height: 250px;
 	border-radius: 30px;
@@ -92,9 +67,10 @@
 	border: none;
 	padding: 15px;
 	resize: none;
+	margin-bottom: 30px;
 }
 
-.editing__input__quantity__input input {
+.adding__product__input__quantity__input input {
 	width: 255px;
 	height: 60px;
 	border-radius: 30px;
@@ -103,9 +79,10 @@
 	font-size: 16px;
 	border: none;
 	padding: 10px;
+	margin-bottom: 60px;
 }
 
-.editing__input__submit__button input {
+.adding__input__submit__button input {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -115,51 +92,18 @@
 	font-family: 'Roboto', sans-serif;
 	font-size: 24px;
 	font-weight: 600;
-	border-radius: 30px;
-	margin :50px 160px 0px 160px;
+	border-radius: 20px;
+	margin:  0 auto 0 auto;
 }
 
-.editing__input__submit__button input:hover {
+.adding__input__submit__button input:hover {
 	transform: scale(1.1);
 	transition: 200ms all ease;
 	cursor: pointer;
 }
 
-.editing__input__submit__button input:not(:hover) {
+.adding__input__submit__button input:not(:hover) {
 	transform: scale(1.0);
 	transition: 200ms all ease;
 	cursor: pointer;
-}
-
-.exit_editing {
-	 position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #adacac;
-    border-radius: 50%;
-    border-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    line-height: 1.35;
-    cursor: pointer;
-    color: #000;
-    margin: 0 10px;
-    z-index: 2;
-}
-
-.exit_editing:hover {
-    color:  red;
-    border-color:  red;
-    border-radius: 2px;
-    transform: scale(1.1);
-    transition: 100ms ease all;
-}
-
-.exit_editing:not(:hover) {
-    transform: scale(1.0);
-    transition: 100ms ease all;
 }

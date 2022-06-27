@@ -69,6 +69,7 @@
     width: 100%;
     height: 100%;
     background-color: #7b848a;
+    min-width: fit-content;
 }
 
 .aside {
@@ -83,6 +84,20 @@
     background: #3a3a3a;
     margin-right: 10px;
     background-color: #2F5C6C;
+}
+
+.show__aside {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    width:  50px;
+    height: 38px;
+    z-index: 5;
+}
+
+.show__aside img {
+    width:  50px;
+    height: 38px;
 }
 
 /*.aside-name {
@@ -160,7 +175,8 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: start;
+
 }
 
 .order__card {
@@ -210,6 +226,7 @@
 .order__item:last-child {
     border-radius: 0 0 20px 20px;
     border-color: transparent;
+    font-weight: 600;
 }
 
 
@@ -225,13 +242,14 @@
     border: 1px solid black;
     border-collapse: collapse;
     margin: 10px 0px;
+    font-size: 18px;
 }
 
 .admin-table table th {
     border: 1px solid black;
     padding: 5px;
-    background-color: rgba(113, 164, 245, 1.0);
-    bacg
+    background-color: #65B8E6;
+    font-size: 20px;
 }
 
 .admin-table table tbody td {
@@ -240,11 +258,11 @@
 }
 
 .admin-table table tbody tr:nth-child(even){
-    background-color: #aab6bf;
+    background-color: #BCBFC1;
 }
 
 .admin-table table tbody tr:nth-child(odd){
-    background-color: #ccd9e3;
+    background-color: #DEE1E4;
 }
 
 .admin-table table tbody td:nth-child(even){
@@ -260,13 +278,14 @@
     border: 1px solid black;
     border-collapse: collapse;
     margin: 10px 0px;
+    font-size: 18px;
 }
 
 .order-table table th {
     border: 1px solid black;
     padding: 5px;
-    background-color: #eb4034;
-    bacg
+    background-color: #65B8E6;
+    font-size: 20px;
 }
 
 .order-table table tbody td {
@@ -275,11 +294,11 @@
 }
 
 .order-table table tbody tr:nth-child(even){
-    background-color: #aab6bf;
+    background-color: #BCBFC1;
 }
 
 .order-table table tbody tr:nth-child(odd){
-    background-color: #ccd9e3;
+    background-color: #DEE1E4;
 }
 
 .order-table table tbody td:nth-child(even){
