@@ -10,7 +10,7 @@ document.onclick = event => {
     if (event.target.classList.contains('show-admin')) {
         $("#admin-table").show();
         $('.show-admin').addClass('active');
-        $("#order-table").hide();
+        $(".order__cards").hide();
         $('.show-order').removeClass('active');
         $("#product-table").hide();
         $('.show-product').removeClass('active');
@@ -18,7 +18,7 @@ document.onclick = event => {
     if (event.target.classList.contains('show-order')) {
         $("#admin-table").hide();
         $('.show-admin').removeClass('active');
-        $("#order-table").show();
+        $(".order__cards").show();
         $('.show-order').addClass('active');
         $("#product-table").hide();
         $('.show-product').removeClass('active');
@@ -26,7 +26,7 @@ document.onclick = event => {
     if (event.target.classList.contains('show-product')) {
         $("#admin-table").hide();
         $('.show-admin').removeClass('active');
-        $("#order-table").hide();
+        $(".order__cards").hide();
         $('.show-order').removeClass('active');
         $("#product-table").show();
         $('.show-product').addClass('active');

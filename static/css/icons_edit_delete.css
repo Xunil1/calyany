@@ -5,6 +5,10 @@
 	border: none;
 }
 
+.edit_table_order {
+	margin-right: 10px;
+}
+
 .edit__delete__buttons button, .delete_table button, .edit__delete__buttons button {
 	background-color: transparent;
 	border: none;

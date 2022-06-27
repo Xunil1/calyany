@@ -32,43 +32,57 @@
     {% else %}
 
         <div class="admin-body">
-            
-            <aside>
-                <div class="buttons">
-                    <div class="aside-name">
-                        <p>Панель инструментов</p>
+            <aside class="aside">
+                <div class="admin__buttons">
+                    <div class="show-order show__button active">
+                        Заказы
                     </div>
-                    <div>
-                        <button class="button show_add_admin">Добавить админа</button>
+                    <div class="show-product show__button">
+                        Товары
+                        <div class="show_add_product"><img class="show_add_product" src="{{ url_for('static', filename='img/plus.png') }}" alt=""></div>
                     </div>
-                    <div>
-                        <button class="button show_add_product">Добавить товар</button>
-                    </div>
-                    <div>
-                        <form action="/logout" >
-                            <button class="button logout">Выйти</button>
-                        </form>
+                    <div class="show-admin show__button">
+                        Админы
+                        <div class="show_add_admin"><img class="show_add_admin" src="{{ url_for('static', filename='img/plus.png') }}" alt=""></div>
                     </div>
                 </div>
-                <div class="buttons">
-                    <div class="aside-name">
-                        <p>Таблицы</p>
-                    </div>
-                    <div>
-                        <button class="button show-admin active">Таблица админов</button>
-                    </div>
-                    <div>
-                        <button class="button show-order">Таблица заказов</button>
-                    </div>
-                    <div>
-                        <button class="button show-product">Таблица товаров</button>
-                    </div>
+                <div class="button_logout">
+                    Выйти
                 </div>
             </aside>
+
+            <div class="order__cards">
+
+                {% for el in orders %}
+
+                <div class="order__card">
+
+                    <div class="order__item">
+                        Номер заказа: {{el.id}} 
+                    <div class="edit__delete__buttons">
+                        <button data-tooltip="Изменить" class="edit_table_order"><img src="{{ url_for('static', filename='img/edit.png') }}" alt="" class="edit_table_order"  data-id="or_{{el.id}}"></button>
+                        <button data-tooltip="Удалить" class="delete_table"><img src="{{ url_for('static', filename='img/delete.png') }}" alt="" class="delete_table"  data-id="or_{{el.id}}"></button>
+                    </div>
+                </div>
+                    <div class="order__item">Имя: {{el.name}}</div>
+                    <div class="order__item">Адрес: {{el.address}}</div>
+                    <div class="order__item">Номер: {{el.phone}}</div>
+                    <div class="order__item">Соц.сети: {{el.messenger}}</div>
+                    <div class="order__item">Комментарий: {{el.comment}}</div>
+                    <div class="order__item">Залог: {{el.deposit}}</div>
+                    <div class="order__item">Время: {{el.time.strftime("%d.%m.%Y, %H:%M:%S")}}</div>
+                    <div class="order__item">Заказ: {{el.order_el}}</div>
+                    <div class="order__item">Сумма заказа: {{el.order_price}}</div>
+                </div>
+
+            {% endfor %}
+
+            </div>
+
+            
             
             <div class="admin-tools">
-                <h1>Это админ-панель, для {{session['username']}}</h1>
-            <div class="admin-table" id="admin-table">
+            <div class="admin-table" id="admin-table" style="display:none;">
                 <table>
                     <thead>
                         <tr>
@@ -99,10 +113,11 @@
                             </tr>
 
                         {% endfor %}
+
                     </tbody>
                 </table>
                 </div>
-                <div class="order-table" id="order-table" style="display:none;">
+                <!-- <div class="order-table" id="order-table" style="display:none;">
                     <table>
                         <thead>
                             <tr>
@@ -146,7 +161,7 @@
 
                         </tbody>
                     </table>
-                </div>
+                </div> -->
                 <div class="order-table" id="product-table" style="display:none;">
                     <table>
                         <thead>
@@ -182,7 +197,6 @@
                 </div>
             </div>
         </div>
-
     {% endif %}
 
 
@@ -360,7 +374,7 @@
                         <input type="password" name="email" id="add_admin_email" placeholder="E-mail">
                     </div>
                     <div class="adding__admin__input__submit__button">
-                        <input id="add_admin_form_submit" type="button" value="Изменить">
+                        <input id="add_admin_form_submit" type="button" value="Добавить">
                     </div>
                 </form>
             </div>
