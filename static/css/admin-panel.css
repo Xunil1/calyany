@@ -68,7 +68,7 @@
     justify-content: left;
     width: 100%;
     height: 100%;
-    background-color: #7b848a;
+    background-color: #323232;
     min-width: fit-content;
 }
 
@@ -171,6 +171,18 @@
     font-size: 16px;
 }
 
+.button_logout:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 100ms all ease;
+}
+
+.button_logout:not(:hover) {
+    cursor: pointer;
+    transform: scale(1.0);
+    transition: 100ms all ease;
+}
+
 .order__cards {
     display: flex;
     flex-wrap: wrap;
@@ -216,8 +228,14 @@
     height: 100px;
 }
 
+.order__item:nth-child(6) {
+    height: 100px;
+    overflow: auto;
+    align-items: flex-start;
+}
+
 .order__item:nth-child(9) {
-    height: 200px;
+    height: 130px;
     overflow: auto;
     align-items: flex-start;
 /*    padding-top: 80px;*/
