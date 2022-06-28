@@ -82,66 +82,69 @@ def main_send(message):
     global state
     global order
     global order_price
-    if state[message.chat.id] == "default":
-        if message.chat.type == 'private':
-            if message.text == 'Заказать ✅':
-                state[message.chat.id] = "ordering"
-                order[message.chat.id] = {
-                    "name": "",
-                    "address": "",
-                    "phone": "",
-                    "comment": "",
-                    "deposit": "",
-                    "order_el": [],
-                    "messenger": "",
-                    "order_price": 30
-                }
-                order[message.chat.id]["messenger"] = "@" + message.chat.username
-                order_price[message.chat.id] = 0
-                bot.send_message(message.chat.id, questions["name"], reply_markup=types.ReplyKeyboardRemove())
+    try:
+        if state[message.chat.id] == "default":
+            if message.chat.type == 'private':
+                if message.text == 'Заказать ✅':
+                    state[message.chat.id] = "ordering"
+                    order[message.chat.id] = {
+                        "name": "",
+                        "address": "",
+                        "phone": "",
+                        "comment": "",
+                        "deposit": "",
+                        "order_el": [],
+                        "messenger": "",
+                        "order_price": 30
+                    }
+                    order[message.chat.id]["messenger"] = "@" + message.chat.username
+                    order_price[message.chat.id] = 0
+                    bot.send_message(message.chat.id, questions["name"], reply_markup=types.ReplyKeyboardRemove())
 
-            elif message.text == 'Посмотреть товары 📦':
-                products = set_products_into_telegram()
-                message_products = ''
-                k = 1
-                for el in products:
-                    message_products += str(k) + ") " + el.name + "\n"
-                    k += 1
-                bot.send_message(message.chat.id,
-                                 'У нас широкий выбор ассортимента:\n\n' + message_products + '\nСкорее нажми кнопку "Заказать ✅"')
-            else:
-                bot.send_message(message.chat.id, 'Я тебя немного не понял, попробуй написать /help')
-    else:
-        if order[message.chat.id]["name"] == "":
-            order[message.chat.id]["name"] = message.text
-            bot.send_message(message.chat.id, questions["address"])
-        elif order[message.chat.id]["address"] == "":
-            order[message.chat.id]["address"] = message.text
-            bot.send_message(message.chat.id, questions["phone"])
-        elif order[message.chat.id]["phone"] == "":
-            order[message.chat.id]["phone"] = message.text
-            bot.send_message(message.chat.id, questions["comment"])
-        elif order[message.chat.id]["comment"] == "":
-            order[message.chat.id]["comment"] = message.text
-            markup = types.InlineKeyboardMarkup(row_width=2)
-            item1 = types.InlineKeyboardButton("Паспорт 📕", callback_data="паспорт")
-            item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
-            markup.add(item1, item2)
-            bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
-        elif order[message.chat.id]["deposit"] == "":
-            if message.text in ["паспорт", "100$"]:
-                order[message.chat.id]["deposit"] = message.text
-                bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
-            else:
-                bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
+                elif message.text == 'Посмотреть товары 📦':
+                    products = set_products_into_telegram()
+                    message_products = ''
+                    k = 1
+                    for el in products:
+                        message_products += str(k) + ") " + el.name + "\n"
+                        k += 1
+                    bot.send_message(message.chat.id,
+                                     'У нас широкий выбор ассортимента:\n\n' + message_products + '\nСкорее нажми кнопку "Заказать ✅"')
+                else:
+                    bot.send_message(message.chat.id, 'Я тебя немного не понял, попробуй написать /help')
+        else:
+            if order[message.chat.id]["name"] == "":
+                order[message.chat.id]["name"] = message.text
+                bot.send_message(message.chat.id, questions["address"])
+            elif order[message.chat.id]["address"] == "":
+                order[message.chat.id]["address"] = message.text
+                bot.send_message(message.chat.id, questions["phone"])
+            elif order[message.chat.id]["phone"] == "":
+                order[message.chat.id]["phone"] = message.text
+                bot.send_message(message.chat.id, questions["comment"])
+            elif order[message.chat.id]["comment"] == "":
+                order[message.chat.id]["comment"] = message.text
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 item1 = types.InlineKeyboardButton("Паспорт 📕", callback_data="паспорт")
                 item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
                 markup.add(item1, item2)
                 bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
-        elif state[message.chat.id] == "make_choice":
-            bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
-            bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
+            elif order[message.chat.id]["deposit"] == "":
+                if message.text in ["паспорт", "100$"]:
+                    order[message.chat.id]["deposit"] = message.text
+                    bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
+                else:
+                    bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
+                    markup = types.InlineKeyboardMarkup(row_width=2)
+                    item1 = types.InlineKeyboardButton("Паспорт 📕", callback_data="паспорт")
+                    item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
+                    markup.add(item1, item2)
+                    bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
+            elif state[message.chat.id] == "make_choice":
+                bot.send_message(message.chat.id, "Для лучшего взаимодействия воспользуйтесь кнопками под сообщением)")
+                bot.send_message(message.chat.id, questions["order_el"][0], reply_markup=create_keyboard_products())
+    except:
+        bot.send_message(message.chat.id, "Возникла ошибка, пожалуйста нажмите введите /start или воспользуйтесь меню")
 
 
 @bot.callback_query_handler(func=lambda call: True)

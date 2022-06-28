@@ -73,10 +73,12 @@ document.onclick = event => {
     if (event.target.classList.contains('show__aside') && !($('.aside').hasClass('aside__position__absolute'))) {
         $('.aside').removeClass('aside__display__none');
         $('.aside').addClass('aside__position__absolute');
+        $('.body').addClass('overflow_hidden');
     }
     else if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
         $('.aside').addClass('aside__display__none');
         $('.aside').removeClass('aside__position__absolute');
+        $('.body').removeClass('overflow_hidden');
     }
 
     // if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
