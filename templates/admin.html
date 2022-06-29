@@ -163,14 +163,29 @@
                         </tbody>
                     </table>
                 </div> -->
-                <div class="order-table" id="product-table" style="display:none;">
+                <div class="product__table" id="product-table" style="display:none;">
                     <table>
                         <thead>
                             <tr>
-                                <th>Название</th>
+                                <th>
+                                    <span>Название</span>
+                                    <div class="sort__products" >
+                                        <img id="sort-products-byname" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                    </div>
+                                </th>
                                 <th>Описание</th>
-                                <th>Количество</th>
-                                <th>Время добавления</th>
+                                <th>
+                                    <span>Количество</span>
+                                    <div class="sort__products" >
+                                        <img id="sort-products-byqauntity" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                    </div>
+                                </th>
+                                <th>
+                                    <span>Время добавления</span>
+                                    <div class="sort__products" >
+                                        <img id="sort-products-bytime" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                    </div>
+                                </th>
                                 <th>Действия</th>
                             </tr>
                         </thead>

@@ -247,9 +247,18 @@
     font-weight: 600;
 }
 
+.sort__products {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width:  20px;
+    height: 20px;
+}
 
-
-
+.sort__products img {
+    width:  20px;
+    height: 20px;
+}
 
 
 
@@ -288,38 +297,50 @@
     padding: 5px;
 }
 
-.order-table {
+.order-table, .product__table {
     max-width: 90%; 
 }
 
-.order-table table {
+.order-table table, .product__table table {
     border: 1px solid black;
     border-collapse: collapse;
     margin: 10px 0px;
     font-size: 18px;
 }
 
-.order-table table th {
+.order-table table th, .product__table table th{
     border: 1px solid black;
     padding: 5px;
     background-color: #65B8E6;
     font-size: 20px;
 }
 
-.order-table table tbody td {
+.product__table table th:nth-child(1){
+    max-width: fit-content;
+}
+
+.product__table table th:nth-child(3){
+    width: 150px;
+}
+
+.product__table table th:nth-child(4){
+    max-width: fit-content;
+}
+
+.order-table table tbody td, .product__table table tbody td {
     border: 1px solid black;
     padding: 5px;
 }
 
-.order-table table tbody tr:nth-child(even){
+.order-table table tbody tr:nth-child(even), .product__table table tbody tr:nth-child(even) {
     background-color: #BCBFC1;
 }
 
-.order-table table tbody tr:nth-child(odd){
+.order-table table tbody tr:nth-child(odd), .product__table table tbody tr:nth-child(odd){
     background-color: #DEE1E4;
 }
 
-.order-table table tbody td:nth-child(even){
+.order-table table tbody td:nth-child(even), .product__table table tbody td:nth-child(even){
     border: 1px solid black;
     padding: 5px;
 }
