@@ -80,18 +80,6 @@ def index():
                     order_el += product.name + " ×" + request.form[el] + "; "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
-        # send_message(
-        #     {
-        #         "id": order.id,
-        #         "name": name,
-        #         "address": address,
-        #         "phone": phone,
-        #         "messenger": messenger,
-        #         "comment": comment,
-        #         "order_el": order_el,
-        #         "order_price": order_price
-        #     }
-        # )
         try:
             db.session.add(order)
             db.session.commit()
@@ -119,9 +107,39 @@ def admin():
             logIn = False
         else:
             logIn = True
+        args = request.args
+        get_args = args.to_dict()
+        sort = get_args.get("sort")
+        print(sort)
+        products = None
+        if sort is not None:
+            if sort[4:] == "name":
+                if sort[:3] == "dsc":
+                    products = Products.query.order_by(Products.name.desc()).all()
+                    print("ok")
+                elif sort[:3] == "asc":
+                    products = Products.query.order_by(Products.name.asc()).all()
+                    print("okk too")
+            elif sort[4:] == "count":
+                if sort[:3] == "dsc":
+                    products = Products.query.order_by(Products.count.desc()).all()
+                    print("ok")
+                elif sort[:3] == "asc":
+                    products = Products.query.order_by(Products.count.asc()).all()
+                    print("okk too")
+            elif sort[4:] == "time":
+                if sort[:3] == "dsc":
+                    products = Products.query.order_by(Products.time.desc()).all()
+                    print("ok")
+                elif sort[:3] == "asc":
+                    products = Products.query.order_by(Products.time.asc()).all()
+                    print("okk too")
+
+        else:
+            products = Products.query.order_by(Products.time.desc()).all()
+
         admins = Admin.query.order_by(Admin.time.desc()).all()
         orders = Order.query.order_by(Order.time.desc()).all()
-        products = Products.query.order_by(Products.time.desc()).all()
         return render_template("admin.html", logIn=logIn, admins=admins, orders=orders, products=products)
 
 
