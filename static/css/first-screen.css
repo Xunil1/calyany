@@ -27,6 +27,8 @@
     background-attachment: fixed;
     overflow: hidden;
     position: absolute;
+    text-align: center;
+    vertical-align: middle;
     top: 0;
     left: 0;
     bottom: 0;
