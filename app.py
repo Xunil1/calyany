@@ -412,8 +412,7 @@ def set_orders_into_telegram(time_interval):
     num = 0
     for el in order:
         if (datetime.now() - el.time).total_seconds() < time_interval:
-            orders[num](
-                {
+            orders[num] = {
                     "id": el.id,
                     "name": el.name,
                     "address": el.address,
@@ -423,7 +422,7 @@ def set_orders_into_telegram(time_interval):
                     "order_el": el.order_el,
                     "order_price": el.order_price
                 }
-            )
+
             num += 1
         else:
             break
