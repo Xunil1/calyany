@@ -1,3 +1,5 @@
+import json
+
 import werkzeug.security
 from flask import Flask, render_template, url_for, request, redirect, session, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
@@ -380,26 +382,37 @@ def cat_page():
     return render_template('cat_page.html')
 
 
-def add_order_from_telegram(order):
-    order_to_bd = Order(name=order["name"], address=order["address"], phone=order["phone"], messenger=order["messenger"], comment=order["comment"], deposit=order["deposit"], order_el=order["order_el"], order_price=order["order_price"], time=datetime.today())
+@app.route("/set_order", methods=["POST"])
+def add_order_from_telegram():
+    r = request.json
+    order_to_bd = Order(name=r["name"], address=r["address"], phone=r["phone"], messenger=r["messenger"], comment=r["comment"], deposit=r["deposit"], order_el=r["order_el"], order_price=r["order_price"], time=datetime.today())
     try:
         db.session.add(order_to_bd)
         db.session.commit()
-        return True
+        return "True"
     except:
-        return False
+        return ""
 
+
+@app.route("/set_products")
 def set_products_into_telegram():
     products = Products.query.filter(Products.count > 0).order_by(Products.time.desc()).all()
-    return products
+    product = {}
+    num = 0
+    for el in products:
+        product[num] = {"name": el.name}
+        num += 1
+    return json.dumps(product, indent=4)
 
 
+@app.route("/set_orders/<int:time_interval>")
 def set_orders_into_telegram(time_interval):
-    orders = []
+    orders = {}
     order = Order.query.order_by(Order.time.desc()).all()
+    num = 0
     for el in order:
-        if (datetime.now() - el.time).total_seconds() < int(time_interval):
-            orders.append(
+        if (datetime.now() - el.time).total_seconds() < time_interval:
+            orders[num](
                 {
                     "id": el.id,
                     "name": el.name,
@@ -411,6 +424,7 @@ def set_orders_into_telegram(time_interval):
                     "order_price": el.order_price
                 }
             )
+            num += 1
         else:
             break
     return orders
