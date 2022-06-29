@@ -427,7 +427,7 @@ def set_orders_into_telegram(time_interval):
             num += 1
         else:
             break
-    return orders
+    return json.dumps(orders, indent=4)
 
 
 if __name__ == "__main__":
