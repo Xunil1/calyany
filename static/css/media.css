@@ -82,7 +82,7 @@
 @media screen and (max-width: 470px) {
 
 	.bg {
-		-webkit-background-attachment: scroll;
+		background-attachment: scroll;
 	}
 
 	.title-first h1 {
