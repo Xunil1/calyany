@@ -112,35 +112,41 @@ def admin():
         sort = get_args.get("sort")
         print(sort)
         products = None
+        sort_class = {
+            "name": "asc",
+            "count": "asc",
+            "time": "asc"
+        }
         if sort is not None:
             if sort[4:] == "name":
                 if sort[:3] == "dsc":
                     products = Products.query.order_by(Products.name.desc()).all()
-                    print("ok")
+                    sort_class["name"] = "asc"
                 elif sort[:3] == "asc":
                     products = Products.query.order_by(Products.name.asc()).all()
-                    print("okk too")
+                    sort_class["name"] = "desc"
             elif sort[4:] == "count":
                 if sort[:3] == "dsc":
                     products = Products.query.order_by(Products.count.desc()).all()
-                    print("ok")
+                    sort_class["count"] = "asc"
                 elif sort[:3] == "asc":
                     products = Products.query.order_by(Products.count.asc()).all()
-                    print("okk too")
+                    sort_class["count"] = "desc"
             elif sort[4:] == "time":
                 if sort[:3] == "dsc":
                     products = Products.query.order_by(Products.time.desc()).all()
-                    print("ok")
+                    sort_class["time"] = "asc"
                 elif sort[:3] == "asc":
                     products = Products.query.order_by(Products.time.asc()).all()
-                    print("okk too")
+                    sort_class["time"] = "desc"
 
         else:
             products = Products.query.order_by(Products.time.desc()).all()
+            sort_class["time"] = "asc"
 
         admins = Admin.query.order_by(Admin.time.desc()).all()
         orders = Order.query.order_by(Order.time.desc()).all()
-        return render_template("admin.html", logIn=logIn, admins=admins, orders=orders, products=products)
+        return render_template("admin.html", logIn=logIn, admins=admins, orders=orders, products=products, sort_class=sort_class)
 
 
 @app.route("/add_admin", methods=['POST'])

@@ -55,7 +55,7 @@ document.onclick = event => {
         $('.body').addClass('overflow_hidden');
     }
     
-    if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
+    if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing') || event.target.classList.contains('adding__product') || event.target.classList.contains('editing_order') || event.target.classList.contains('editing_admin') || event.target.classList.contains('adding_admin')) {
         $('.editing').addClass('display_none');
         $('.adding__product').addClass('display_none');
         $('.editing_admin').addClass('display_none');
@@ -79,6 +79,12 @@ document.onclick = event => {
         $('.aside').addClass('aside__display__none');
         $('.aside').removeClass('aside__position__absolute');
         $('.body').removeClass('overflow_hidden');
+    }
+    if (event.target.id == "edit_product_form_submit" || event.target.id == "edit_order_form_submit" || event.target.id == "edit_admin_form_submit") {
+        send_edited_data(event.target.dataset.id);
+    }
+    if (event.target.classList.contains('sort__button')) {
+        sort_data(event.target.id);
     }
 
     // if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
@@ -121,7 +127,7 @@ function send_adding_data(path, form, modal){
                     alert("Запись успешно добавлена!")
                     modal.addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
-                    renderTables()
+                    renderTables(window.location.pathname + window.location.search)
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
@@ -137,6 +143,38 @@ function log_out(){
             success: function(data){
                 location.reload();
             }
+        })
+}
+
+function sort_data(id){
+
+    //console.log(id.split("-")[0] + "-" + id.split("-")[1] + "-" + id.split("-")[2] + "-asc")
+    path = "/admin?sort="
+    id_el = id.split("-")
+    column = id_el[2]
+    console.log($("#" + id).hasClass("asc"))
+
+    if ($("#" + id).hasClass("desc")){
+        path += "dsc_"
+    }
+    else{
+        path += "asc_"
+    }
+
+    if (column == "byname"){
+        path += "name"
+    }
+    else if (column == "byqauntity"){
+        path += "count"
+    }
+    else{
+        path += "time"
+    }
+
+    $.ajax(path, {
+            success: function(data){
+                    renderTables(path)
+                }
         })
 }
 
@@ -159,7 +197,7 @@ function delete_from_table(id){
             success: function(data){
                 if (data["status"] != "unauthorized_user"){
                     if (data["status"] === "deleted"){
-                        renderTables()
+                        renderTables(window.location.pathname + window.location.search)
                     }
                 }
             }
@@ -192,7 +230,6 @@ function send_edited_data(id){
 		dataType: 'html',
 		data: form.serialize(),
 		success: function(data_add){
-		    console.log(data_add)
 		    if (data_add === "unauthorized_user"){
                 alert("Для дальнейших действий вам нужно авторизоваться!")
             }
@@ -201,7 +238,7 @@ function send_edited_data(id){
                     alert("Запись успешно изменена!")
                     modal.addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
-                    renderTables()
+                    renderTables(window.location.pathname + window.location.search)
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
@@ -213,7 +250,6 @@ function send_edited_data(id){
 
 
 function edit_from_table(id){
-    console.log(id)
     path = ''
     if (id.slice(0,2) === "ad"){
         path = "getAdmin"
@@ -265,16 +301,13 @@ function edit_from_table(id){
 
 }
 
-
-
-
 function getUpdate(interval){
     setTimeout(function(){
         $.ajax('/admin/getUpdate/' + interval + "000", {
             success: function(data){
                 if (data["status"] != "unauthorized_user"){
                     if (data["status"] === "updated"){
-                        renderTables()
+                        renderTables(window.location.pathname + window.location.search)
                     }
                     getUpdate(interval)
                 }
@@ -283,8 +316,9 @@ function getUpdate(interval){
     )
 }
 
-function renderTables(){
-    $.get("/admin").done(function(response){
+function renderTables(path){
+    console.log(path)
+    $.get(path).done(function(response){
         let document=$(response);
         let admin_table = document.find("#admin-table").find("table");
         let order_table = document.find(".order__cards");
