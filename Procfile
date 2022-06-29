@@ -1,2 +1,2 @@
 web: gunicorn app:app
-web: gunicorn telegram:telegram
+worker: gunicorn telegram:telegram
