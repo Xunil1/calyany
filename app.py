@@ -62,7 +62,6 @@ def index():
         phone = request.form["phone"]
         messenger = request.form["messenger"]
         comment = request.form["comment"]
-        print(request.form["deposit"])
         if request.form["deposit"] == "passport":
             deposit = "паспорт"
         else:
@@ -113,7 +112,6 @@ def admin():
         args = request.args
         get_args = args.to_dict()
         sort = get_args.get("sort")
-        print(sort)
         products = None
         sort_class = {
             "name": "asc",
@@ -251,7 +249,6 @@ def getUpdate(time_interval):
     if 'username' not in session:
         return {"status": "unauthorized_user"}
     else:
-        print(time_interval)
         update = False
         admins = Admin.query.order_by(Admin.time.desc()).all()
         for el in admins:
