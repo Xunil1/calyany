@@ -121,7 +121,7 @@ function send_adding_data(path, form, modal){
                     alert("Запись успешно добавлена!")
                     modal.addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
-                    renderTables()
+                    renderTables(window.location.pathname + window.location.search)
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
@@ -159,7 +159,7 @@ function delete_from_table(id){
             success: function(data){
                 if (data["status"] != "unauthorized_user"){
                     if (data["status"] === "deleted"){
-                        renderTables()
+                        renderTables(window.location.pathname + window.location.search)
                     }
                 }
             }
@@ -192,7 +192,6 @@ function send_edited_data(id){
 		dataType: 'html',
 		data: form.serialize(),
 		success: function(data_add){
-		    console.log(data_add)
 		    if (data_add === "unauthorized_user"){
                 alert("Для дальнейших действий вам нужно авторизоваться!")
             }
@@ -201,7 +200,7 @@ function send_edited_data(id){
                     alert("Запись успешно изменена!")
                     modal.addClass('display_none');
                     $('.body').removeClass('overflow_hidden');
-                    renderTables()
+                    renderTables(window.location.pathname + window.location.search)
                 }
                 else{
                     alert("Произошла ошибка, пожалуйста попробуйте позже!")
@@ -213,7 +212,6 @@ function send_edited_data(id){
 
 
 function edit_from_table(id){
-    console.log(id)
     path = ''
     if (id.slice(0,2) === "ad"){
         path = "getAdmin"
@@ -265,16 +263,13 @@ function edit_from_table(id){
 
 }
 
-
-
-
 function getUpdate(interval){
     setTimeout(function(){
         $.ajax('/admin/getUpdate/' + interval + "000", {
             success: function(data){
                 if (data["status"] != "unauthorized_user"){
                     if (data["status"] === "updated"){
-                        renderTables()
+                        renderTables(window.location.pathname + window.location.search)
                     }
                     getUpdate(interval)
                 }
@@ -283,8 +278,9 @@ function getUpdate(interval){
     )
 }
 
-function renderTables(){
-    $.get("/admin").done(function(response){
+function renderTables(path){
+    console.log(path)
+    $.get(path).done(function(response){
         let document=$(response);
         let admin_table = document.find("#admin-table").find("table");
         let order_table = document.find(".order__cards");
