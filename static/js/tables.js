@@ -6,7 +6,6 @@ $( document ).ready(function() {
 });
 
 document.onclick = event => {
-    console.log(event.target.classList)
     if (event.target.classList.contains('show-admin')) {
         $("#admin-table").show();
         $('.show-admin').addClass('active');
@@ -118,7 +117,6 @@ function send_adding_data(path, form, modal){
 		dataType: 'html',
 		data: form.serialize(),
 		success: function(data_add){
-		    console.log(data_add)
 		    if (data_add === "unauthorized_user"){
                 alert("Для дальнейших действий вам нужно авторизоваться!")
             }
@@ -152,7 +150,6 @@ function sort_data(id){
     path = "/admin?sort="
     id_el = id.split("-")
     column = id_el[2]
-    console.log($("#" + id).hasClass("asc"))
 
     if ($("#" + id).hasClass("desc")){
         path += "dsc_"

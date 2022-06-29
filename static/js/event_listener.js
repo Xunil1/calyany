@@ -1,5 +1,4 @@
 document.onclick = event => {
-    console.log(event.target.classList)
     if (event.target.classList.contains('add')) {
         addFunction(event.target.dataset.id);
     }
