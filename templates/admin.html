@@ -170,20 +170,20 @@
                                 <th>
                                     <span>Название</span>
                                     <div class="sort__products" >
-                                        <img id="sort-products-byname" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                        <img class="sort__button {{sort_class['name']}}" id="sort-products-byname" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
                                     </div>
                                 </th>
                                 <th>Описание</th>
                                 <th>
                                     <span>Количество</span>
                                     <div class="sort__products" >
-                                        <img id="sort-products-byqauntity" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                        <img class="sort__button {{sort_class['count']}}" id="sort-products-byqauntity" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
                                     </div>
                                 </th>
                                 <th>
                                     <span>Время добавления</span>
                                     <div class="sort__products" >
-                                        <img id="sort-products-bytime" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
+                                        <img class="sort__button {{sort_class['time']}}" id="sort-products-bytime" src="{{ url_for('static', filename='img/sort.png') }}" alt="">
                                     </div>
                                 </th>
                                 <th>Действия</th>
@@ -273,25 +273,25 @@
             <div class="editing__form">
                 <form id="edit_product_form" action="">
                     <div class="editing__input__name">
-                        <div class="editing__input__title">
-                            Название
-                        </div>
+<!--                        <div class="editing__input__title">-->
+<!--                            Название-->
+<!--                        </div>-->
                         <div class="editing__input__name__input">
                             <input type="text" name="name" id="edit_product_name" placeholder="Название товара">
                         </div>
                     </div>
                     <div class="editing__input__description">
-                        <div class="editing__input__title">
-                            Описание
-                        </div>
+<!--                        <div class="editing__input__title">-->
+<!--                            Описание-->
+<!--                        </div>-->
                         <div class="editing__input__description__input">
                             <textarea name="description" id="edit_product_description" placeholder="Описание товара"></textarea>
                         </div>
                     </div>
                     <div class="editing__input__quantity">
-                        <div class="editing__input__title">
-                            Количество
-                        </div>
+<!--                        <div class="editing__input__title">-->
+<!--                            Количество-->
+<!--                        </div>-->
                         <div class="editing__input__quantity__input">
                             <input type="number" min="0" name="count" id="edit_product_count" placeholder="Количество товара">
                         </div>

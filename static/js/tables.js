@@ -55,7 +55,7 @@ document.onclick = event => {
         $('.body').addClass('overflow_hidden');
     }
     
-    if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing')) {
+    if (event.target.classList.contains('exit_editing') || event.target.classList.contains('editing') || event.target.classList.contains('adding__product') || event.target.classList.contains('editing_order') || event.target.classList.contains('editing_admin') || event.target.classList.contains('adding_admin')) {
         $('.editing').addClass('display_none');
         $('.adding__product').addClass('display_none');
         $('.editing_admin').addClass('display_none');
@@ -79,6 +79,12 @@ document.onclick = event => {
         $('.aside').addClass('aside__display__none');
         $('.aside').removeClass('aside__position__absolute');
         $('.body').removeClass('overflow_hidden');
+    }
+    if (event.target.id == "edit_product_form_submit" || event.target.id == "edit_order_form_submit" || event.target.id == "edit_admin_form_submit") {
+        send_edited_data(event.target.dataset.id);
+    }
+    if (event.target.classList.contains('sort__button')) {
+        sort_data(event.target.id);
     }
 
     // if (event.target.classList.contains('show__aside') && $('.aside').hasClass('aside__position__absolute')) {
@@ -137,6 +143,38 @@ function log_out(){
             success: function(data){
                 location.reload();
             }
+        })
+}
+
+function sort_data(id){
+
+    //console.log(id.split("-")[0] + "-" + id.split("-")[1] + "-" + id.split("-")[2] + "-asc")
+    path = "/admin?sort="
+    id_el = id.split("-")
+    column = id_el[2]
+    console.log($("#" + id).hasClass("asc"))
+
+    if ($("#" + id).hasClass("desc")){
+        path += "dsc_"
+    }
+    else{
+        path += "asc_"
+    }
+
+    if (column == "byname"){
+        path += "name"
+    }
+    else if (column == "byqauntity"){
+        path += "count"
+    }
+    else{
+        path += "time"
+    }
+
+    $.ajax(path, {
+            success: function(data){
+                    renderTables(path)
+                }
         })
 }
 
