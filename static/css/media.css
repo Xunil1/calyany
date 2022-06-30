@@ -106,6 +106,35 @@
 
 	.hookah-cup-description {
 	}
+
+	.card {
+		height: 300px;
+	}
+	.order__succesful_container {
+		height: 200px;
+		width: 200px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+	.order__successful_title_first {
+		width: 200px;
+		height: 56px;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 28px;
+	}
+	.order__successful_pic {
+		width: 55px;
+		height: 55px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+	.order__successful_title_second {
+		width: 200px;
+		height: 57px;
+		font-size: 16px;
+		line-height: 18.75px;
+	}
 }
 
 @media screen and (max-width: 450px) {

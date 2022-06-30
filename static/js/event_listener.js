@@ -28,4 +28,12 @@ document.onclick = event => {
 		$('.body').removeClass('overflow_hidden');
 		$('.disclaimer').hide()
 	}
+    if (event.target.classList.contains('submit__button')) {
+        console.log('submit')
+        $('.order__succesful').removeClass('display_none');
+        // setTimeout(function (){
+            // $('.order__succesful').addClass('display_none')
+            // }, 5000)
+    }
+    
 }
