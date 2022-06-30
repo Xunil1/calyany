@@ -113,10 +113,11 @@ const renderCart = () => {
 
     if (price < 30){
         $('.submit__button').attr('disabled', true);
+		$('.cart__order').addClass('display_none')
     }
     else{
         $('.submit__button').removeAttr('disabled');
-
+		$('.cart__order').removeClass('display_none')
     }
 
 }
