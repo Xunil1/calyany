@@ -89,7 +89,17 @@
             </div>
         </div>
         <div class="cards">
-
+            <div class="card">
+                <div class="card-title">
+                    Выберите что-нибудь сами
+                </div>
+                <div class="card-description">
+                    Мы подберем по вашему запросу чашу на наше усмотрение
+                </div>
+                <div class="card-add add" data-id="choise">
+                    Добавить в чашу
+                </div>
+            </div>
             {% for el in products %}
 
                 <div class="card">
@@ -242,7 +252,7 @@
             </div>
             <div class="disclaimer__container__buttons">
                 <div class="disclaimer__button" id="disclaimer__confirm">
-                    <div class="disclaimer__button_text">
+                    <div class="disclaimer__button_text" id="disclaimer__confirm__text">
                         Да, мне есть 18 лет
                     </div>
                 </div>
