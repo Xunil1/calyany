@@ -217,5 +217,7 @@
 	.disclaimer__button {
 		margin-bottom: 20px;
 	}
-
+	.cart__container {
+		bottom: 100px;
+	}
 }
