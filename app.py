@@ -66,21 +66,23 @@ def index():
         if request.form["deposit"] == "passport":
             deposit = "паспорт"
         else:
-            deposit = "100$"
+            deposit = "300₾ или 100$"
         order_el = ''
         order_price = 0
         for el in request.form:
             if el.startswith('order_'):
                 product_id = el[6:]
                 if product_id == "extra-cup":
-                    order_el += "Доп.забивка ×" + request.form[el] + "; "
+                    order_el += "Доп.забивка ×" + request.form[el] + " (" + request.form[el] + "×" + str(config.price["Доп.забивка"]) + " GEL); "
                     order_price += int(request.form[el]) * config.price["Доп.забивка"]
                 elif product_id == "calyan":
-                    order_el += "Кальян ×" + request.form[el] + "; "
+                    order_el += "Кальян ×" + request.form[el]  + " (" + request.form[el] + "×" + str(config.price["Кальян"]) + " GEL); "
                     order_price += int(request.form[el]) * config.price["Кальян"]
+                elif product_id == "choise":
+                    order_el += "Выберите что-нибудь сами ×" + request.form[el]  + " (" + request.form[el] + "×0 GEL); "
                 else:
                     product = Products.query.filter_by(id=product_id).first()
-                    order_el += product.name + " ×" + request.form[el] + "; "
+                    order_el += product.name + " ×" + request.form[el]  + " (" + request.form[el] + "×0 GEL); "
 
         order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit, order_el=order_el, order_price=order_price, time=datetime.today())
         try:

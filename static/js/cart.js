@@ -73,6 +73,10 @@ const renderCart = () => {
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + cart[cart_el] * pricing[cart_el] + ' GEL</div>'
 			price += cart[cart_el] * pricing[cart_el]
 		}
+		else if (cart_el === "choise"){
+			html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">Выберите что-нибудь сами</div>'
+            html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + 0 + ' GEL</div>'
+		}
 		else{
 		    html_products += '<div class="cart_el" id="cart_el"><div class="cart_el_title">'+ json[cart_el] + '</div>'
             html_products += '<div class="cart_el_count"><div class="cart_el_button minus" data-id="'+ cart_el +'">–</div><div class="cart_el_count_number">' + cart[cart_el] + '</div><div class="cart_el_button plus" data-id="'+ cart_el +'">+</div></div><div class="cart_el_price">' + 0 + ' GEL</div>'
