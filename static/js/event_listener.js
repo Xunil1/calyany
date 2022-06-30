@@ -1,4 +1,5 @@
 document.onclick = event => {
+    console.log(event.target.classList)
     if (event.target.classList.contains('add')) {
         addFunction(event.target.dataset.id);
     }
@@ -29,11 +30,32 @@ document.onclick = event => {
 		$('.disclaimer').hide()
 	}
     if (event.target.classList.contains('submit__button')) {
-        console.log('submit')
-        $('.order__succesful').removeClass('display_none');
-        // setTimeout(function (){
-            // $('.order__succesful').addClass('display_none')
-            // }, 5000)
+        send_order('/set_order_from_site', $("#cart__form"), $('#cart'))
     }
     
+}
+
+
+
+function send_order(path, form, modal){
+    $.ajax({
+		url: path,
+		method: 'post',
+		dataType: 'html',
+		data: form.serialize(),
+		success: function(data_add){
+            if (data_add === "order_added"){
+                $('.order__succesful').removeClass('display_none');
+                modal.addClass('display_none');
+                setTimeout( function(){
+                    $('.order__succesful').addClass('display_none');
+                    location.reload();
+                }, 3000)
+                $('.body').removeClass('overflow_hidden');
+            }
+            else{
+                alert("Произошла ошибка, пожалуйста попробуйте позже!")
+            }
+        }
+	});
 }

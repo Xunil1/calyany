@@ -100,6 +100,47 @@ def index():
         return render_template("index.html", products=products, for_json=for_json)
 
 
+@app.route("/set_order_from_site", methods=["POST"])
+def add_order_from_site():
+    name = request.form["name"]
+    address = request.form["address"]
+    phone = request.form["phone"]
+    messenger = request.form["messenger"]
+    comment = request.form["comment"]
+    if request.form["deposit"] == "passport":
+        deposit = "паспорт"
+    else:
+        deposit = "300₾ или 100$"
+    order_el = ''
+    order_price = 0
+    for el in request.form:
+        if el.startswith('order_'):
+            product_id = el[6:]
+            if product_id == "extra-cup":
+                order_el += "Доп.забивка ×" + request.form[el] + " (" + request.form[el] + "×" + str(
+                    config.price["Доп.забивка"]) + " GEL); "
+                order_price += int(request.form[el]) * config.price["Доп.забивка"]
+            elif product_id == "calyan":
+                order_el += "Кальян ×" + request.form[el] + " (" + request.form[el] + "×" + str(
+                    config.price["Кальян"]) + " GEL); "
+                order_price += int(request.form[el]) * config.price["Кальян"]
+            elif product_id == "choise":
+                order_el += "Выберите что-нибудь сами ×" + request.form[el] + " (" + request.form[el] + "×0 GEL); "
+            else:
+                product = Products.query.filter_by(id=product_id).first()
+                order_el += product.name + " ×" + request.form[el] + " (" + request.form[el] + "×0 GEL); "
+
+    order = Order(name=name, address=address, phone=phone, messenger=messenger, comment=comment, deposit=deposit,
+                  order_el=order_el, order_price=order_price, time=datetime.today())
+    try:
+        db.session.add(order)
+        db.session.commit()
+        return "order_added"
+    except:
+        return "error"
+
+
+
 @app.route("/admin", methods=['POST', 'GET'])
 def admin():
     if request.method == 'POST':
