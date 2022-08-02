@@ -93,7 +93,7 @@ def index():
             return "При добавлении пользователя произошла ошибка"
 
     else:
-        products = Products.query.filter(Products.count > 0).order_by(Products.name.desc()).all()
+        products = Products.query.filter(Products.count > 0).order_by(Products.name.asc()).all()
         for_json = dict()
         for el in products:
             for_json[el.id] = el.name
