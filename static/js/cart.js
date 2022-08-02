@@ -1,7 +1,7 @@
 // console.log(json)
 let pricing = {
-	"calyan": 30,
-	"extra-cup": 12
+	"calyan": 45,
+	"extra-cup": 20
 } 
 let cart = {
 
@@ -111,7 +111,7 @@ const renderCart = () => {
 	$('.final__price').append(html_price);
 	$('.cart_fullprice').append(html_price);
 
-    if (price < 30){
+    if (price < pricing["calyan"]){
         $('.submit__button').attr('disabled', true);
 		$('.cart__order').addClass('display_none')
     }
